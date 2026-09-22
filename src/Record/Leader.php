@@ -4,89 +4,90 @@ declare(strict_types=1);
 
 namespace MirayS\Marc\Record;
 
-final class Leader extends PositionalField
+final class Leader extends CodedField
 {
     public const LENGTH = 24;
 
     public const DEFAULT = '00000nam a2200000   4500';
 
-    public function positions(): array
+    public function getRecordFormat(): RecordFormat
+    {
+        return RecordFormat::fromLeader($this->getTypeOfRecord());
+    }
+
+    protected function tag(): string
+    {
+        return 'LDR';
+    }
+
+    protected function variant(): string
+    {
+        return 'ALL';
+    }
+
+    public function aliases(): array
     {
         return [
-            'recordLength' => [0, 5],
-            'recordStatus' => [5, 1],
-            'typeOfRecord' => [6, 1],
-            'bibliographicLevel' => [7, 1],
-            'typeOfControl' => [8, 1],
-            'characterCodingScheme' => [9, 1],
-            'indicatorCount' => [10, 1],
-            'subfieldCodeCount' => [11, 1],
-            'baseAddressOfData' => [12, 5],
-            'encodingLevel' => [17, 1],
-            'descriptiveCatalogingForm' => [18, 1],
-            'multipartResourceRecordLevel' => [19, 1],
-            'entryMap' => [20, 4],
+            'recordLength' => 'logicalRecordLength',
+            'logicalRecordLength' => 'recordLength',
+            'subfieldCodeCount' => 'subfieldCodeLength',
+            'subfieldCodeLength' => 'subfieldCodeCount',
         ];
     }
 
     public function getRecordLength(): int
     {
-        return (int) $this->get('recordLength');
+        return (int) $this->at(0, 5);
     }
 
     public function getRecordStatus(): string
     {
-        return (string) $this->get('recordStatus');
+        return (string) $this->at(5);
     }
 
     public function getTypeOfRecord(): string
     {
-        return (string) $this->get('typeOfRecord');
+        return (string) $this->at(6);
     }
 
     public function getBibliographicLevel(): string
     {
-        return (string) $this->get('bibliographicLevel');
+        return (string) $this->at(7);
     }
 
     public function getTypeOfControl(): string
     {
-        return (string) $this->get('typeOfControl');
+        return (string) $this->at(8);
     }
 
     public function getCharacterCodingScheme(): string
     {
-        return (string) $this->get('characterCodingScheme');
+        return (string) $this->at(9);
     }
 
     public function getBaseAddressOfData(): int
     {
-        return (int) $this->get('baseAddressOfData');
+        return (int) $this->at(12, 5);
     }
 
     public function getEncodingLevel(): string
     {
-        return (string) $this->get('encodingLevel');
+        return (string) $this->at(17);
     }
 
     public function getDescriptiveCatalogingForm(): string
     {
-        return (string) $this->get('descriptiveCatalogingForm');
+        return (string) $this->at(18);
     }
 
     public function getMultipartResourceRecordLevel(): string
     {
-        return (string) $this->get('multipartResourceRecordLevel');
+        return (string) $this->at(19);
     }
 
     public function getMaterialType(): MaterialType
     {
         return MaterialType::fromLeader($this->getTypeOfRecord(), $this->getBibliographicLevel());
-    }
-
-    public function getRecordFormat(): RecordFormat
-    {
-        return RecordFormat::fromLeader($this->getTypeOfRecord());
     }
 
     public function isBibliographic(): bool

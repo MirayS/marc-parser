@@ -27,6 +27,7 @@ abstract class PositionalField
     public function get(string $name): ?string
     {
         $positions = $this->positions();
+        $name = isset($positions[$name]) ? $name : $this->resolveName($name);
 
         if (!isset($positions[$name])) {
             return null;
@@ -35,6 +36,39 @@ abstract class PositionalField
         [$offset, $length] = $positions[$name];
 
         return $this->at($offset, $length);
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public function aliases(): array
+    {
+        return [];
+    }
+
+    public function resolveName(string $name): string
+    {
+        return $this->aliases()[$name] ?? $name;
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public function values(string $name): array
+    {
+        return [];
+    }
+
+    public function describe(string $name): ?string
+    {
+        $value = $this->get($name);
+
+        return $value === null ? null : ($this->values($name)[$value] ?? null);
+    }
+
+    public function label(string $name): ?string
+    {
+        return null;
     }
 
     /**

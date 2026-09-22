@@ -7,6 +7,7 @@ namespace MirayS\Marc\Bibliographic;
 use MirayS\Marc\CodeList\Countries;
 use MirayS\Marc\CodeList\Languages;
 use MirayS\Marc\CodeList\Relators;
+use MirayS\Marc\CodeList\Vocabularies;
 use MirayS\Marc\Record\DataField;
 use MirayS\Marc\Record\FixedField007;
 use MirayS\Marc\Record\FixedField008;
@@ -261,6 +262,60 @@ final class Bibliographic
         $date = $value === null ? null : $this->cleanDate($value);
 
         return $date ?? $this->fixedField008()?->getDate1();
+    }
+
+    public function dateType(): ?string
+    {
+        return $this->fixedField008()?->get('typeOfDate');
+    }
+
+    public function isDateApproximate(): bool
+    {
+        return in_array($this->dateType(), ['q', 'n', 'u'], true);
+    }
+
+    public function originalPublicationDate(): ?string
+    {
+        $field = $this->fixedField008();
+
+        if ($field === null || !in_array($field->get('typeOfDate'), ['r', 't'], true)) {
+            return null;
+        }
+
+        return $field->getDate2();
+    }
+
+    public function isFiction(): ?bool
+    {
+        $form = $this->fixedField008()?->get('literaryForm');
+
+        if ($form === null || $form === '|' || $form === 'u') {
+            return null;
+        }
+
+        return $form !== '0' && $form !== 'e' && $form !== 'i' && $form !== 's';
+    }
+
+    public function literaryForm(): ?string
+    {
+        return $this->fixedField008()?->describe('literaryForm');
+    }
+
+    public function targetAudienceCode(): ?string
+    {
+        $code = $this->fixedField008()?->get('targetAudience');
+
+        return $code === null || $code === '|' || trim($code) === '' ? null : $code;
+    }
+
+    public function targetAudience(): ?string
+    {
+        return $this->targetAudienceCode() === null ? null : $this->fixedField008()?->describe('targetAudience');
+    }
+
+    public function isJuvenile(): bool
+    {
+        return in_array($this->targetAudienceCode(), ['a', 'b', 'c', 'd', 'j'], true);
     }
 
     public function copyrightDate(): ?string
@@ -583,6 +638,52 @@ final class Bibliographic
     public function carrierType(): ?string
     {
         return $this->record->firstSubfield('338', 'b');
+    }
+
+    public function contentTypeLabel(): ?string
+    {
+        $code = $this->contentType();
+
+        return $code === null ? null : Vocabularies::label(Vocabularies::CONTENT_TYPES, $code);
+    }
+
+    public function mediaTypeLabel(): ?string
+    {
+        $code = $this->mediaType();
+
+        return $code === null ? null : Vocabularies::label(Vocabularies::MEDIA_TYPES, $code);
+    }
+
+    public function carrierTypeLabel(): ?string
+    {
+        $code = $this->carrierType();
+
+        return $code === null ? null : Vocabularies::label(Vocabularies::CARRIERS, $code);
+    }
+
+    /**
+     * @return list<array{code: string, name: string|null}>
+     */
+    public function geographicAreas(): array
+    {
+        $areas = [];
+
+        foreach ($this->record->subfieldValues('043', 'a') as $code) {
+            $code = trim($code);
+            $areas[] = [
+                'code' => $code,
+                'name' => Vocabularies::label(Vocabularies::GEOGRAPHIC_AREAS, rtrim($code, '-')),
+            ];
+        }
+
+        return $areas;
+    }
+
+    public function catalogingConvention(): ?string
+    {
+        $code = $this->record->firstSubfield('040', 'e');
+
+        return $code === null ? null : Vocabularies::label(Vocabularies::DESCRIPTION_CONVENTIONS, trim($code)) ?? trim($code);
     }
 
     public function isMonograph(): bool

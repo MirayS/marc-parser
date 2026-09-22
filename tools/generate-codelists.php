@@ -2,6 +2,18 @@
 
 declare(strict_types=1);
 
+const VOCABULARIES = [
+    'subjectSchemes' => 'Source of subject headings and terms, subfield $2 of 6XX',
+    'classSchemes' => 'Source of classification numbers, subfield $2 of 08X',
+    'genreFormSchemes' => 'Source of genre and form terms, subfield $2 of 655',
+    'descriptionConventions' => 'Cataloguing rules, 040 subfield $e',
+    'contentTypes' => 'RDA content type, 336 subfield $b',
+    'mediaTypes' => 'RDA media type, 337 subfield $b',
+    'carriers' => 'RDA carrier type, 338 subfield $b',
+    'issuance' => 'Mode of issuance',
+    'frequencies' => 'Frequency of a continuing resource, 310 and 008',
+];
+
 const SOURCES = [
     'languages' => 'https://id.loc.gov/vocabulary/languages.json',
     'countries' => 'https://id.loc.gov/vocabulary/countries.json',
@@ -72,7 +84,7 @@ function decode(string $json): array
  *
  * @return array<string, string>
  */
-function labels(array $vocabulary): array
+function labels(array $vocabulary, string $pattern = '/^[a-z]{2,3}$/'): array
 {
     $codes = [];
 
@@ -83,18 +95,30 @@ function labels(array $vocabulary): array
 
         $code = $concept['http://www.loc.gov/mads/rdf/v1#code'][0]['@value'] ?? null;
 
-        if (!is_string($code) || preg_match('/^[a-z]{2,3}$/', $code) !== 1) {
+        if (!is_string($code) || $code === '' || preg_match($pattern, $code) !== 1) {
             continue;
         }
 
+        $fallback = null;
+
         foreach ($concept['http://www.loc.gov/mads/rdf/v1#authoritativeLabel'] ?? [] as $label) {
+            if (!is_string($label['@value'] ?? null)) {
+                continue;
+            }
+
             $language = $label['@language'] ?? 'en';
 
-            if ($language === 'en' && is_string($label['@value'] ?? null)) {
+            if ($language === 'en') {
                 $codes[$code] = $label['@value'];
 
-                break;
+                continue 2;
             }
+
+            $fallback ??= $label['@value'];
+        }
+
+        if ($fallback !== null) {
+            $codes[$code] = $fallback;
         }
     }
 
@@ -212,6 +236,83 @@ function write(string $path, string $contents): void
 
 $target = dirname(__DIR__) . '/src/CodeList';
 
+/**
+ * @return array<string, string>
+ */
+function geographicAreas(): array
+{
+    $codes = [];
+    $start = 1;
+
+    while (true) {
+        $url = sprintf(
+            'https://id.loc.gov/search/?q=cs:http://id.loc.gov/vocabulary/geographicAreas&start=%d&format=json',
+            $start,
+        );
+
+        $entries = [];
+        collectAtomEntries(decode(fetch($url)), $entries);
+
+        if ($entries === []) {
+            break;
+        }
+
+        foreach ($entries as $code => $label) {
+            $codes[$code] = $label;
+        }
+
+        $start += count($entries);
+
+        if ($start > 2000) {
+            break;
+        }
+
+        usleep(150000);
+    }
+
+    ksort($codes);
+
+    return $codes;
+}
+
+/**
+ * @param array<mixed> $node
+ * @param array<string, string> $entries
+ */
+function collectAtomEntries(array $node, array &$entries): void
+{
+    if (($node[0] ?? null) === 'atom:entry') {
+        $title = null;
+        $code = null;
+
+        foreach ($node as $child) {
+            if (!is_array($child)) {
+                continue;
+            }
+
+            if (($child[0] ?? null) === 'atom:title' && is_string($child[2] ?? null)) {
+                $title = $child[2];
+            }
+
+            if (($child[0] ?? null) === 'atom:id' && is_string($child[2] ?? null)) {
+                $code = substr((string) strrchr($child[2], '/'), 1);
+            }
+        }
+
+        if ($title !== null && $code !== null && $code !== '') {
+            $entries[$code] = $title;
+        }
+
+        return;
+    }
+
+    foreach ($node as $child) {
+        if (is_array($child)) {
+            collectAtomEntries($child, $entries);
+        }
+    }
+}
+
 $languages = labels(decode(fetch(SOURCES['languages'])));
 $relators = labels(decode(fetch(SOURCES['relators'])));
 $countriesRaw = labels(decode(fetch(SOURCES['countries'])));
@@ -299,6 +400,81 @@ write($target . '/Countries.php', classHeader('Countries', SOURCES['countries'])
 }
 
 PHP);
+
+$vocabularies = [];
+
+foreach (VOCABULARIES as $name => $description) {
+    $vocabularies[$name] = [
+        'description' => $description,
+        'codes' => labels(decode(fetch(sprintf('https://id.loc.gov/vocabulary/%s.json', $name))), '/^\S+$/'),
+    ];
+    printf("  %-24s %d codes\n", $name, count($vocabularies[$name]['codes']));
+}
+
+$vocabularies['geographicAreas'] = [
+    'description' => 'Geographic area of the subject, 043 subfield $a',
+    'codes' => geographicAreas(),
+];
+printf("  %-24s %d codes\n", 'geographicAreas', count($vocabularies['geographicAreas']['codes']));
+
+$lists = [];
+
+foreach ($vocabularies as $name => $vocabulary) {
+    $lists[] = sprintf(
+        "        %s => [\n            'description' => %s,\n            'codes' => [\n%s\n            ],\n        ],",
+        var_export($name, true),
+        var_export($vocabulary['description'], true),
+        exportMap($vocabulary['codes'], 16),
+    );
+}
+
+write($target . '/Vocabularies.php', "<?php\n\ndeclare(strict_types=1);\n\nnamespace MirayS\\Marc\\CodeList;\n\n"
+    . "final class Vocabularies\n{\n"
+    . "    public const SUBJECT_SCHEMES = 'subjectSchemes';\n"
+    . "    public const CLASSIFICATION_SCHEMES = 'classSchemes';\n"
+    . "    public const GENRE_FORM_SCHEMES = 'genreFormSchemes';\n"
+    . "    public const DESCRIPTION_CONVENTIONS = 'descriptionConventions';\n"
+    . "    public const CONTENT_TYPES = 'contentTypes';\n"
+    . "    public const MEDIA_TYPES = 'mediaTypes';\n"
+    . "    public const CARRIERS = 'carriers';\n"
+    . "    public const ISSUANCE = 'issuance';\n"
+    . "    public const FREQUENCIES = 'frequencies';\n"
+    . "    public const GEOGRAPHIC_AREAS = 'geographicAreas';\n\n"
+    . "    public const LISTS = [\n" . implode("\n", $lists) . "\n    ];\n\n"
+    . <<<'PHPCODE'
+    public static function label(string $list, string $code): ?string
+    {
+        return self::LISTS[$list]['codes'][trim($code)] ?? null;
+    }
+
+    public static function exists(string $list, string $code): bool
+    {
+        return isset(self::LISTS[$list]['codes'][trim($code)]);
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public static function codes(string $list): array
+    {
+        return self::LISTS[$list]['codes'] ?? [];
+    }
+
+    public static function description(string $list): ?string
+    {
+        return self::LISTS[$list]['description'] ?? null;
+    }
+
+    /**
+     * @return list<string>
+     */
+    public static function names(): array
+    {
+        return array_keys(self::LISTS);
+    }
+}
+
+PHPCODE);
 
 printf(
     "languages %d, relators %d, countries %d (%d without ISO: %s)\n",

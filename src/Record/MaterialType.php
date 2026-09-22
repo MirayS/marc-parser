@@ -14,6 +14,11 @@ enum MaterialType: string
     case VisualMaterials = 'VM';
     case MixedMaterials = 'MX';
 
+    public function code(): string
+    {
+        return $this->value;
+    }
+
     public static function fromLeader(string $typeOfRecord, string $bibliographicLevel): self
     {
         return match ($typeOfRecord) {

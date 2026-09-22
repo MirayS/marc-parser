@@ -8,7 +8,9 @@ use MirayS\Marc\CodeList\Countries;
 use MirayS\Marc\CodeList\Dictionary;
 use MirayS\Marc\CodeList\Languages;
 use MirayS\Marc\CodeList\Relators;
+use MirayS\Marc\CodeList\Vocabularies;
 use MirayS\Marc\Issue\Issue;
+use MirayS\Marc\Record\CodedField;
 use MirayS\Marc\Record\ControlField;
 use MirayS\Marc\Record\DataField;
 use MirayS\Marc\Record\FixedField008;
@@ -20,6 +22,7 @@ final class Validator
     public function __construct(
         private readonly bool $checkCodeLists = true,
         private readonly bool $checkIndicators = true,
+        private readonly bool $checkFixedFields = true,
     ) {
     }
 
@@ -34,6 +37,24 @@ final class Validator
 
         if (strlen($record->getRawLeader()) !== Leader::LENGTH) {
             $issues[] = new Issue(Issue::INVALID_LEADER, 'leader', 'Leader must be 24 bytes', $id);
+        }
+
+        if ($this->checkFixedFields) {
+            $issues = array_merge($issues, $this->validateCodedField($record->getLeader(), 'leader', $id));
+
+            foreach ($record->getFixedFields006() as $field) {
+                $issues = array_merge($issues, $this->validateCodedField($field, '006', $id));
+            }
+
+            foreach ($record->getFixedFields007() as $field) {
+                $issues = array_merge($issues, $this->validateCodedField($field, '007', $id));
+            }
+
+            $fixed = $record->getFixedField008();
+
+            if ($fixed !== null) {
+                $issues = array_merge($issues, $this->validateCodedField($fixed, '008', $id));
+            }
         }
 
         $seenTags = [];
@@ -70,6 +91,41 @@ final class Validator
 
             if ($field instanceof DataField) {
                 $issues = array_merge($issues, $this->validateDataField($field, $dictionary, $id));
+            }
+        }
+
+        return $issues;
+    }
+
+    /**
+     * @return list<Issue>
+     */
+    private function validateCodedField(CodedField $field, string $path, ?string $id): array
+    {
+        $issues = [];
+
+        foreach ($field->definitions() as $name => $definition) {
+            if ($definition['values'] === []) {
+                continue;
+            }
+
+            $value = $field->get($name);
+
+            if ($value === null || $definition['length'] > 1) {
+                continue;
+            }
+
+            if (!isset($definition['values'][$value])) {
+                $issues[] = new Issue(
+                    Issue::UNKNOWN_CODE,
+                    sprintf('%s/%02d', $path, $definition['offset']),
+                    sprintf(
+                        'Value %s is not defined for %s',
+                        $value === ' ' ? 'blank' : $value,
+                        $definition['label'],
+                    ),
+                    $id,
+                );
             }
         }
 
@@ -206,6 +262,55 @@ final class Validator
             return [new Issue(Issue::UNKNOWN_CODE, $path, sprintf('Unknown country code %s', $value), $id)];
         }
 
+        if ($tag === '043' && $code === 'a' && !Vocabularies::exists(Vocabularies::GEOGRAPHIC_AREAS, rtrim($value, '-'))) {
+            return [new Issue(Issue::UNKNOWN_CODE, $path, sprintf('Unknown geographic area code %s', $value), $id)];
+        }
+
+        $list = $this->listFor($tag, $code);
+
+        if ($list !== null && !Vocabularies::exists($list, $value)) {
+            return [new Issue(
+                Issue::UNKNOWN_CODE,
+                $path,
+                sprintf('%s is not in the %s list', $value, Vocabularies::description($list) ?? $list),
+                $id,
+            )];
+        }
+
         return [];
+    }
+
+    private function listFor(string $tag, string $code): ?string
+    {
+        if ($code === '2') {
+            if ($tag === '655') {
+                return Vocabularies::GENRE_FORM_SCHEMES;
+            }
+
+            if (str_starts_with($tag, '6')) {
+                return Vocabularies::SUBJECT_SCHEMES;
+            }
+
+            if (in_array($tag, ['084', '086'], true)) {
+                return Vocabularies::CLASSIFICATION_SCHEMES;
+            }
+
+            return null;
+        }
+
+        if ($tag === '040' && $code === 'e') {
+            return Vocabularies::DESCRIPTION_CONVENTIONS;
+        }
+
+        if ($code !== 'b') {
+            return null;
+        }
+
+        return match ($tag) {
+            '336' => Vocabularies::CONTENT_TYPES,
+            '337' => Vocabularies::MEDIA_TYPES,
+            '338' => Vocabularies::CARRIERS,
+            default => null,
+        };
     }
 }

@@ -150,6 +150,34 @@ relator codes, publisher, dates, language and country codes, extent, subjects, c
 856 links, and the leader/007/338 checks behind `isMonograph()`, `isOnlineResource()` and
 `isDeleted()`.
 
+## Coded values
+
+Every position of the leader, 006, 007 and 008 knows its own label and the values the standard
+defines for it, so a record answers in words as well as in codes:
+
+```php
+$fixed = $record->getFixedField008();
+
+$fixed->get('typeOfDate');        // 's'
+$fixed->describe('typeOfDate');   // 'Single known date/probable date'
+$fixed->label('literaryForm');    // 'Literary form'
+$fixed->values('literaryForm');   // ['0' => 'Not fiction …', 'f' => 'Novels', …]
+$fixed->toLabelled();             // every coded position, spelled out
+
+$record->getLeader()->describe('encodingLevel');
+$record->getFixedFields007()[0]->describe('specificMaterialDesignation');
+```
+
+`Bibliographic` uses them for the things a catalogue cares about — `dateType()`,
+`originalPublicationDate()` (the original year behind a reprint), `isDateApproximate()`,
+`isFiction()`, `literaryForm()`, `targetAudience()` and `isJuvenile()`.
+
+`CodeList\Vocabularies` carries the source lists the standard points at: subject, classification
+and genre/form scheme codes for `$2`, cataloguing conventions for 040`$e`, the RDA content, media
+and carrier terms of 336-338, modes of issuance, frequencies, and the 537 geographic area codes of
+043. `Bibliographic::contentTypeLabel()`, `carrierTypeLabel()`, `geographicAreas()` and
+`catalogingConvention()` read them off a record.
+
 ## Code lists and validation
 
 `CodeList\Languages`, `CodeList\Countries` (with a crosswalk to ISO 3166-1 alpha-2),
@@ -160,8 +188,10 @@ label and repeatability, including the embedded holdings block — is generated 
 `tools/generate-marc8-tables.php` builds the MARC-8 tables from the Library of Congress code
 tables. Both sources live in `tools/data`. `Validation\Validator`
 uses them to report undefined tags, subfields and indicator values, repeated non-repeatable ones,
-broken fixed-field lengths and unknown code values, while leaving locally defined fields (a `9`
-anywhere in the tag, subfield `$9`) alone.
+broken fixed-field lengths, coded positions holding a value the standard does not define, and
+scheme or area codes that are not in the lists they cite — while leaving locally defined fields (a
+`9` anywhere in the tag, subfield `$9`) alone. Each check can be switched off on its own:
+`new Validator(checkCodeLists: false, checkIndicators: false, checkFixedFields: false)`.
 
 ## Tests
 

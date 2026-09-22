@@ -16,6 +16,10 @@ parses it into `src/CodeList/Fields.php`, skipping everything marked `[OBSOLETE]
 Holdings, parsed by the same generator into `src/CodeList/AuthorityFields.php` and
 `src/CodeList/HoldingsFields.php`.
 
+The same three files also carry the leader, 006, 007 and 008 definitions — every character
+position with its label and the values defined for it — which `tools/generate-fixed-fields.php`
+turns into `src/CodeList/FixedFields.php`.
+
 `marc21-supplement.json` — what the bibliographic list does not carry: the embedded holdings
 block (841-845, 853-855, 863-868, 876-878), whose subfields are defined in the MARC 21 Holdings
 format, the superseded but still widespread 440, and a handful of subfields added after that
