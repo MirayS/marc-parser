@@ -48,10 +48,14 @@ const LINKING_ENTRY_SUBFIELDS = [
     'b' => ['label' => 'Edition', 'repeatable' => false],
     'c' => ['label' => 'Qualifying information', 'repeatable' => false],
     'd' => ['label' => 'Place, publisher, and date of publication', 'repeatable' => false],
+    'e' => ['label' => 'Language code', 'repeatable' => false],
+    'f' => ['label' => 'Country code', 'repeatable' => false],
     'g' => ['label' => 'Related parts', 'repeatable' => true],
     'h' => ['label' => 'Physical description', 'repeatable' => false],
     'i' => ['label' => 'Relationship information', 'repeatable' => true],
+    'j' => ['label' => 'Period of content', 'repeatable' => false],
     'k' => ['label' => 'Series data for related item', 'repeatable' => true],
+    'l' => ['label' => 'Language', 'repeatable' => false],
     'm' => ['label' => 'Material-specific details', 'repeatable' => false],
     'n' => ['label' => 'Note', 'repeatable' => true],
     'o' => ['label' => 'Other item identifier', 'repeatable' => true],
@@ -61,6 +65,7 @@ const LINKING_ENTRY_SUBFIELDS = [
     's' => ['label' => 'Uniform title', 'repeatable' => false],
     't' => ['label' => 'Title', 'repeatable' => false],
     'u' => ['label' => 'Standard Technical Report Number', 'repeatable' => false],
+    'v' => ['label' => 'Source contribution', 'repeatable' => false],
     'w' => ['label' => 'Record control number', 'repeatable' => true],
     'x' => ['label' => 'International Standard Serial Number', 'repeatable' => false],
     'y' => ['label' => 'CODEN designation', 'repeatable' => false],
@@ -68,6 +73,7 @@ const LINKING_ENTRY_SUBFIELDS = [
     '0' => ['label' => 'Authority record control number or standard number', 'repeatable' => true],
     '1' => ['label' => 'Real World Object URI', 'repeatable' => true],
     '3' => ['label' => 'Materials specified', 'repeatable' => false],
+    '5' => ['label' => 'Institution to which field applies', 'repeatable' => false],
     '4' => ['label' => 'Relationship', 'repeatable' => true],
     '6' => ['label' => 'Linkage', 'repeatable' => false],
     '7' => ['label' => 'Control subfield', 'repeatable' => false],
@@ -340,6 +346,37 @@ foreach ($fieldsRaw['fields'] ?? [] as $tag => $definition) {
         'repeatable' => (bool) ($definition['repeatable'] ?? false),
         'subfields' => $subfields,
     ];
+}
+
+$supplementFile = __DIR__ . '/data/marc21-supplement.json';
+$supplementRaw = file_get_contents($supplementFile);
+$supplement = is_string($supplementRaw) ? decode($supplementRaw) : ['fields' => [], 'subfields' => []];
+
+foreach ($supplement['fields'] ?? [] as $tag => $definition) {
+    if (!is_array($definition)) {
+        continue;
+    }
+
+    $fields[(string) $tag] ??= [
+        'label' => (string) ($definition['label'] ?? ''),
+        'repeatable' => (bool) ($definition['repeatable'] ?? false),
+        'subfields' => $definition['subfields'] ?? [],
+    ];
+}
+
+foreach ($supplement['subfields'] ?? [] as $tag => $codes) {
+    if (!isset($fields[(string) $tag]) || !is_array($codes)) {
+        continue;
+    }
+
+    foreach ($codes as $code => $definition) {
+        $fields[(string) $tag]['subfields'][(string) $code] ??= [
+            'label' => (string) ($definition['label'] ?? ''),
+            'repeatable' => (bool) ($definition['repeatable'] ?? false),
+        ];
+    }
+
+    ksort($fields[(string) $tag]['subfields']);
 }
 
 foreach ($fields as $tag => $definition) {

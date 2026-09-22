@@ -78,7 +78,11 @@ final class ValidatorTest extends TestCase
         self::assertGreaterThan(400, count(Languages::CODES));
         self::assertGreaterThan(300, count(Relators::CODES));
         self::assertGreaterThan(300, count(Countries::CODES));
-        self::assertGreaterThan(230, count(Fields::TAGS));
+        self::assertGreaterThan(245, count(Fields::TAGS));
+        self::assertTrue(Fields::exists('863'));
+        self::assertTrue(Fields::exists('341'));
+        self::assertTrue(Fields::subfieldExists('041', 'g'));
+        self::assertTrue(Fields::subfieldExists('773', 'l'));
         self::assertTrue(Fields::exists('776'));
         self::assertTrue(Fields::isLocal('945'));
         self::assertFalse(Fields::isLocal('490'));

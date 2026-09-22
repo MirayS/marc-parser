@@ -1,0 +1,1596 @@
+{
+    "fields": {
+        "841": {
+            "label": "Holdings coded data values",
+            "repeatable": false,
+            "subfields": {
+                "a": {
+                    "label": "Type of record",
+                    "repeatable": false
+                },
+                "b": {
+                    "label": "Fixed-length data elements",
+                    "repeatable": false
+                },
+                "e": {
+                    "label": "Encoding level",
+                    "repeatable": false
+                }
+            }
+        },
+        "842": {
+            "label": "Textual physical form designator",
+            "repeatable": false,
+            "subfields": {
+                "6": {
+                    "label": "Linkage",
+                    "repeatable": false
+                },
+                "8": {
+                    "label": "Field link and sequence number",
+                    "repeatable": true
+                },
+                "a": {
+                    "label": "Textual physical form designator",
+                    "repeatable": false
+                }
+            }
+        },
+        "843": {
+            "label": "Reproduction note",
+            "repeatable": true,
+            "subfields": {
+                "3": {
+                    "label": "Materials specified",
+                    "repeatable": false
+                },
+                "6": {
+                    "label": "Linkage",
+                    "repeatable": false
+                },
+                "7": {
+                    "label": "Fixed-length data elements of reproduction",
+                    "repeatable": false
+                },
+                "8": {
+                    "label": "Field link and sequence number",
+                    "repeatable": true
+                },
+                "a": {
+                    "label": "Type of reproduction",
+                    "repeatable": false
+                },
+                "b": {
+                    "label": "Place of reproduction",
+                    "repeatable": true
+                },
+                "c": {
+                    "label": "Agency responsible for reproduction",
+                    "repeatable": true
+                },
+                "d": {
+                    "label": "Date of reproduction",
+                    "repeatable": false
+                },
+                "e": {
+                    "label": "Physical description of reproduction",
+                    "repeatable": true
+                },
+                "f": {
+                    "label": "Series statement of reproduction",
+                    "repeatable": true
+                },
+                "m": {
+                    "label": "Dates of publication and/or sequential designation of issues reproduced",
+                    "repeatable": true
+                },
+                "n": {
+                    "label": "Note about reproduction",
+                    "repeatable": true
+                }
+            }
+        },
+        "844": {
+            "label": "Name of unit",
+            "repeatable": false,
+            "subfields": {
+                "6": {
+                    "label": "Linkage",
+                    "repeatable": false
+                },
+                "8": {
+                    "label": "Field link and sequence number",
+                    "repeatable": true
+                },
+                "a": {
+                    "label": "Name of unit",
+                    "repeatable": false
+                }
+            }
+        },
+        "845": {
+            "label": "Terms governing use and reproduction note",
+            "repeatable": true,
+            "subfields": {
+                "3": {
+                    "label": "Materials specified",
+                    "repeatable": false
+                },
+                "5": {
+                    "label": "Institution to which field applies",
+                    "repeatable": false
+                },
+                "6": {
+                    "label": "Linkage",
+                    "repeatable": false
+                },
+                "8": {
+                    "label": "Field link and sequence number",
+                    "repeatable": true
+                },
+                "a": {
+                    "label": "Terms governing use and reproduction",
+                    "repeatable": false
+                },
+                "b": {
+                    "label": "Jurisdiction",
+                    "repeatable": false
+                },
+                "c": {
+                    "label": "Authorization",
+                    "repeatable": false
+                },
+                "d": {
+                    "label": "Authorized users",
+                    "repeatable": false
+                }
+            }
+        },
+        "853": {
+            "label": "Captions and pattern--basic bibliographic unit",
+            "repeatable": true,
+            "subfields": {
+                "3": {
+                    "label": "Materials specified",
+                    "repeatable": false
+                },
+                "6": {
+                    "label": "Linkage",
+                    "repeatable": false
+                },
+                "8": {
+                    "label": "Field link and sequence number",
+                    "repeatable": true
+                },
+                "a": {
+                    "label": "First level of enumeration",
+                    "repeatable": false
+                },
+                "b": {
+                    "label": "Second level of enumeration",
+                    "repeatable": false
+                },
+                "c": {
+                    "label": "Third level of enumeration",
+                    "repeatable": false
+                },
+                "d": {
+                    "label": "Fourth level of enumeration",
+                    "repeatable": false
+                },
+                "e": {
+                    "label": "Fifth level of enumeration",
+                    "repeatable": false
+                },
+                "f": {
+                    "label": "Sixth level of enumeration",
+                    "repeatable": false
+                },
+                "g": {
+                    "label": "Alternative numbering scheme, first level of enumeration",
+                    "repeatable": false
+                },
+                "h": {
+                    "label": "Alternative numbering scheme, second level of enumeration",
+                    "repeatable": false
+                },
+                "i": {
+                    "label": "First level of chronology",
+                    "repeatable": false
+                },
+                "j": {
+                    "label": "Second level of chronology",
+                    "repeatable": false
+                },
+                "k": {
+                    "label": "Third level of chronology",
+                    "repeatable": false
+                },
+                "l": {
+                    "label": "Fourth level of chronology",
+                    "repeatable": false
+                },
+                "m": {
+                    "label": "Alternative numbering scheme, chronology",
+                    "repeatable": false
+                },
+                "n": {
+                    "label": "Pattern note",
+                    "repeatable": false
+                },
+                "p": {
+                    "label": "Number of pieces per issuance",
+                    "repeatable": false
+                },
+                "t": {
+                    "label": "Copy",
+                    "repeatable": false
+                },
+                "u": {
+                    "label": "Bibliographic units per next higher level",
+                    "repeatable": true
+                },
+                "v": {
+                    "label": "Numbering continuity",
+                    "repeatable": true
+                },
+                "w": {
+                    "label": "Frequency",
+                    "repeatable": false
+                },
+                "x": {
+                    "label": "Calendar change",
+                    "repeatable": false
+                },
+                "y": {
+                    "label": "Regularity pattern",
+                    "repeatable": true
+                },
+                "z": {
+                    "label": "Numbering scheme",
+                    "repeatable": true
+                }
+            }
+        },
+        "854": {
+            "label": "Captions and pattern--supplementary material",
+            "repeatable": true,
+            "subfields": {
+                "3": {
+                    "label": "Materials specified",
+                    "repeatable": false
+                },
+                "6": {
+                    "label": "Linkage",
+                    "repeatable": false
+                },
+                "8": {
+                    "label": "Field link and sequence number",
+                    "repeatable": true
+                },
+                "a": {
+                    "label": "First level of enumeration",
+                    "repeatable": false
+                },
+                "b": {
+                    "label": "Second level of enumeration",
+                    "repeatable": false
+                },
+                "c": {
+                    "label": "Third level of enumeration",
+                    "repeatable": false
+                },
+                "d": {
+                    "label": "Fourth level of enumeration",
+                    "repeatable": false
+                },
+                "e": {
+                    "label": "Fifth level of enumeration",
+                    "repeatable": false
+                },
+                "f": {
+                    "label": "Sixth level of enumeration",
+                    "repeatable": false
+                },
+                "g": {
+                    "label": "Alternative numbering scheme, first level of enumeration",
+                    "repeatable": false
+                },
+                "h": {
+                    "label": "Alternative numbering scheme, second level of enumeration",
+                    "repeatable": false
+                },
+                "i": {
+                    "label": "First level of chronology",
+                    "repeatable": false
+                },
+                "j": {
+                    "label": "Second level of chronology",
+                    "repeatable": false
+                },
+                "k": {
+                    "label": "Third level of chronology",
+                    "repeatable": false
+                },
+                "l": {
+                    "label": "Fourth level of chronology",
+                    "repeatable": false
+                },
+                "m": {
+                    "label": "Alternative numbering scheme, chronology",
+                    "repeatable": false
+                },
+                "n": {
+                    "label": "Pattern note",
+                    "repeatable": false
+                },
+                "p": {
+                    "label": "Number of pieces per issuance",
+                    "repeatable": false
+                },
+                "t": {
+                    "label": "Copy",
+                    "repeatable": false
+                },
+                "u": {
+                    "label": "Bibliographic units per next higher level",
+                    "repeatable": true
+                },
+                "v": {
+                    "label": "Numbering continuity",
+                    "repeatable": true
+                },
+                "w": {
+                    "label": "Frequency",
+                    "repeatable": false
+                },
+                "x": {
+                    "label": "Calendar change",
+                    "repeatable": false
+                },
+                "y": {
+                    "label": "Regularity pattern",
+                    "repeatable": true
+                },
+                "z": {
+                    "label": "Numbering scheme",
+                    "repeatable": true
+                }
+            }
+        },
+        "855": {
+            "label": "Captions and pattern--indexes",
+            "repeatable": true,
+            "subfields": {
+                "3": {
+                    "label": "Materials specified",
+                    "repeatable": false
+                },
+                "6": {
+                    "label": "Linkage",
+                    "repeatable": false
+                },
+                "8": {
+                    "label": "Field link and sequence number",
+                    "repeatable": true
+                },
+                "a": {
+                    "label": "First level of enumeration",
+                    "repeatable": false
+                },
+                "b": {
+                    "label": "Second level of enumeration",
+                    "repeatable": false
+                },
+                "c": {
+                    "label": "Third level of enumeration",
+                    "repeatable": false
+                },
+                "d": {
+                    "label": "Fourth level of enumeration",
+                    "repeatable": false
+                },
+                "e": {
+                    "label": "Fifth level of enumeration",
+                    "repeatable": false
+                },
+                "f": {
+                    "label": "Sixth level of enumeration",
+                    "repeatable": false
+                },
+                "g": {
+                    "label": "Alternative numbering scheme, first level of enumeration",
+                    "repeatable": false
+                },
+                "h": {
+                    "label": "Alternative numbering scheme, second level of enumeration",
+                    "repeatable": false
+                },
+                "i": {
+                    "label": "First level of chronology",
+                    "repeatable": false
+                },
+                "j": {
+                    "label": "Second level of chronology",
+                    "repeatable": false
+                },
+                "k": {
+                    "label": "Third level of chronology",
+                    "repeatable": false
+                },
+                "l": {
+                    "label": "Fourth level of chronology",
+                    "repeatable": false
+                },
+                "m": {
+                    "label": "Alternative numbering scheme, chronology",
+                    "repeatable": false
+                },
+                "n": {
+                    "label": "Pattern note",
+                    "repeatable": false
+                },
+                "p": {
+                    "label": "Number of pieces per issuance",
+                    "repeatable": false
+                },
+                "t": {
+                    "label": "Copy",
+                    "repeatable": false
+                },
+                "u": {
+                    "label": "Bibliographic units per next higher level",
+                    "repeatable": true
+                },
+                "v": {
+                    "label": "Numbering continuity",
+                    "repeatable": true
+                },
+                "w": {
+                    "label": "Frequency",
+                    "repeatable": false
+                },
+                "x": {
+                    "label": "Calendar change",
+                    "repeatable": false
+                },
+                "y": {
+                    "label": "Regularity pattern",
+                    "repeatable": true
+                },
+                "z": {
+                    "label": "Numbering scheme",
+                    "repeatable": true
+                }
+            }
+        },
+        "863": {
+            "label": "Enumeration and chronology--basic bibliographic unit",
+            "repeatable": true,
+            "subfields": {
+                "6": {
+                    "label": "Linkage",
+                    "repeatable": false
+                },
+                "8": {
+                    "label": "Field link and sequence number",
+                    "repeatable": false
+                },
+                "a": {
+                    "label": "First level of enumeration",
+                    "repeatable": false
+                },
+                "b": {
+                    "label": "Second level of enumeration",
+                    "repeatable": false
+                },
+                "c": {
+                    "label": "Third level of enumeration",
+                    "repeatable": false
+                },
+                "d": {
+                    "label": "Fourth level of enumeration",
+                    "repeatable": false
+                },
+                "e": {
+                    "label": "Fifth level of enumeration",
+                    "repeatable": false
+                },
+                "f": {
+                    "label": "Sixth level of enumeration",
+                    "repeatable": false
+                },
+                "g": {
+                    "label": "Alternative numbering scheme, first level of enumeration",
+                    "repeatable": false
+                },
+                "h": {
+                    "label": "Alternative numbering scheme, second level of enumeration",
+                    "repeatable": false
+                },
+                "i": {
+                    "label": "First level of chronology",
+                    "repeatable": false
+                },
+                "j": {
+                    "label": "Second level of chronology",
+                    "repeatable": false
+                },
+                "k": {
+                    "label": "Third level of chronology",
+                    "repeatable": false
+                },
+                "l": {
+                    "label": "Fourth level of chronology",
+                    "repeatable": false
+                },
+                "m": {
+                    "label": "Alternative numbering scheme, chronology",
+                    "repeatable": false
+                },
+                "n": {
+                    "label": "Converted Gregorian year",
+                    "repeatable": false
+                },
+                "o": {
+                    "label": "Type of unit",
+                    "repeatable": true
+                },
+                "p": {
+                    "label": "Piece designation",
+                    "repeatable": false
+                },
+                "q": {
+                    "label": "Piece physical condition",
+                    "repeatable": false
+                },
+                "s": {
+                    "label": "Copyright article-fee code",
+                    "repeatable": true
+                },
+                "t": {
+                    "label": "Copy number",
+                    "repeatable": false
+                },
+                "v": {
+                    "label": "Issuing date",
+                    "repeatable": true
+                },
+                "w": {
+                    "label": "Break indicator",
+                    "repeatable": false
+                },
+                "x": {
+                    "label": "Nonpublic note",
+                    "repeatable": true
+                },
+                "z": {
+                    "label": "Public note",
+                    "repeatable": true
+                }
+            }
+        },
+        "864": {
+            "label": "Enumeration and chronology--supplementary material",
+            "repeatable": true,
+            "subfields": {
+                "6": {
+                    "label": "Linkage",
+                    "repeatable": false
+                },
+                "8": {
+                    "label": "Field link and sequence number",
+                    "repeatable": false
+                },
+                "a": {
+                    "label": "First level of enumeration",
+                    "repeatable": false
+                },
+                "b": {
+                    "label": "Second level of enumeration",
+                    "repeatable": false
+                },
+                "c": {
+                    "label": "Third level of enumeration",
+                    "repeatable": false
+                },
+                "d": {
+                    "label": "Fourth level of enumeration",
+                    "repeatable": false
+                },
+                "e": {
+                    "label": "Fifth level of enumeration",
+                    "repeatable": false
+                },
+                "f": {
+                    "label": "Sixth level of enumeration",
+                    "repeatable": false
+                },
+                "g": {
+                    "label": "Alternative numbering scheme, first level of enumeration",
+                    "repeatable": false
+                },
+                "h": {
+                    "label": "Alternative numbering scheme, second level of enumeration",
+                    "repeatable": false
+                },
+                "i": {
+                    "label": "First level of chronology",
+                    "repeatable": false
+                },
+                "j": {
+                    "label": "Second level of chronology",
+                    "repeatable": false
+                },
+                "k": {
+                    "label": "Third level of chronology",
+                    "repeatable": false
+                },
+                "l": {
+                    "label": "Fourth level of chronology",
+                    "repeatable": false
+                },
+                "m": {
+                    "label": "Alternative numbering scheme, chronology",
+                    "repeatable": false
+                },
+                "n": {
+                    "label": "Converted Gregorian year",
+                    "repeatable": false
+                },
+                "o": {
+                    "label": "Type of unit",
+                    "repeatable": true
+                },
+                "p": {
+                    "label": "Piece designation",
+                    "repeatable": false
+                },
+                "q": {
+                    "label": "Piece physical condition",
+                    "repeatable": false
+                },
+                "s": {
+                    "label": "Copyright article-fee code",
+                    "repeatable": true
+                },
+                "t": {
+                    "label": "Copy number",
+                    "repeatable": false
+                },
+                "v": {
+                    "label": "Issuing date",
+                    "repeatable": true
+                },
+                "w": {
+                    "label": "Break indicator",
+                    "repeatable": false
+                },
+                "x": {
+                    "label": "Nonpublic note",
+                    "repeatable": true
+                },
+                "z": {
+                    "label": "Public note",
+                    "repeatable": true
+                }
+            }
+        },
+        "865": {
+            "label": "Enumeration and chronology--indexes",
+            "repeatable": true,
+            "subfields": {
+                "6": {
+                    "label": "Linkage",
+                    "repeatable": false
+                },
+                "8": {
+                    "label": "Field link and sequence number",
+                    "repeatable": false
+                },
+                "a": {
+                    "label": "First level of enumeration",
+                    "repeatable": false
+                },
+                "b": {
+                    "label": "Second level of enumeration",
+                    "repeatable": false
+                },
+                "c": {
+                    "label": "Third level of enumeration",
+                    "repeatable": false
+                },
+                "d": {
+                    "label": "Fourth level of enumeration",
+                    "repeatable": false
+                },
+                "e": {
+                    "label": "Fifth level of enumeration",
+                    "repeatable": false
+                },
+                "f": {
+                    "label": "Sixth level of enumeration",
+                    "repeatable": false
+                },
+                "g": {
+                    "label": "Alternative numbering scheme, first level of enumeration",
+                    "repeatable": false
+                },
+                "h": {
+                    "label": "Alternative numbering scheme, second level of enumeration",
+                    "repeatable": false
+                },
+                "i": {
+                    "label": "First level of chronology",
+                    "repeatable": false
+                },
+                "j": {
+                    "label": "Second level of chronology",
+                    "repeatable": false
+                },
+                "k": {
+                    "label": "Third level of chronology",
+                    "repeatable": false
+                },
+                "l": {
+                    "label": "Fourth level of chronology",
+                    "repeatable": false
+                },
+                "m": {
+                    "label": "Alternative numbering scheme, chronology",
+                    "repeatable": false
+                },
+                "n": {
+                    "label": "Converted Gregorian year",
+                    "repeatable": false
+                },
+                "o": {
+                    "label": "Type of unit",
+                    "repeatable": true
+                },
+                "p": {
+                    "label": "Piece designation",
+                    "repeatable": false
+                },
+                "q": {
+                    "label": "Piece physical condition",
+                    "repeatable": false
+                },
+                "s": {
+                    "label": "Copyright article-fee code",
+                    "repeatable": true
+                },
+                "t": {
+                    "label": "Copy number",
+                    "repeatable": false
+                },
+                "v": {
+                    "label": "Issuing date",
+                    "repeatable": true
+                },
+                "w": {
+                    "label": "Break indicator",
+                    "repeatable": false
+                },
+                "x": {
+                    "label": "Nonpublic note",
+                    "repeatable": true
+                },
+                "z": {
+                    "label": "Public note",
+                    "repeatable": true
+                }
+            }
+        },
+        "866": {
+            "label": "Textual holdings--basic bibliographic unit",
+            "repeatable": true,
+            "subfields": {
+                "6": {
+                    "label": "Linkage",
+                    "repeatable": false
+                },
+                "8": {
+                    "label": "Field link and sequence number",
+                    "repeatable": true
+                },
+                "a": {
+                    "label": "Textual string",
+                    "repeatable": false
+                },
+                "x": {
+                    "label": "Nonpublic note",
+                    "repeatable": true
+                },
+                "z": {
+                    "label": "Public note",
+                    "repeatable": true
+                }
+            }
+        },
+        "867": {
+            "label": "Textual holdings--supplementary material",
+            "repeatable": true,
+            "subfields": {
+                "6": {
+                    "label": "Linkage",
+                    "repeatable": false
+                },
+                "8": {
+                    "label": "Field link and sequence number",
+                    "repeatable": true
+                },
+                "a": {
+                    "label": "Textual string",
+                    "repeatable": false
+                },
+                "x": {
+                    "label": "Nonpublic note",
+                    "repeatable": true
+                },
+                "z": {
+                    "label": "Public note",
+                    "repeatable": true
+                }
+            }
+        },
+        "868": {
+            "label": "Textual holdings--indexes",
+            "repeatable": true,
+            "subfields": {
+                "6": {
+                    "label": "Linkage",
+                    "repeatable": false
+                },
+                "8": {
+                    "label": "Field link and sequence number",
+                    "repeatable": true
+                },
+                "a": {
+                    "label": "Textual string",
+                    "repeatable": false
+                },
+                "x": {
+                    "label": "Nonpublic note",
+                    "repeatable": true
+                },
+                "z": {
+                    "label": "Public note",
+                    "repeatable": true
+                }
+            }
+        },
+        "876": {
+            "label": "Item information--basic bibliographic unit",
+            "repeatable": true,
+            "subfields": {
+                "3": {
+                    "label": "Materials specified",
+                    "repeatable": false
+                },
+                "6": {
+                    "label": "Linkage",
+                    "repeatable": false
+                },
+                "8": {
+                    "label": "Sequence number",
+                    "repeatable": true
+                },
+                "a": {
+                    "label": "Internal item number",
+                    "repeatable": false
+                },
+                "b": {
+                    "label": "Invalid or canceled internal item number",
+                    "repeatable": true
+                },
+                "c": {
+                    "label": "Cost",
+                    "repeatable": true
+                },
+                "d": {
+                    "label": "Date acquired",
+                    "repeatable": true
+                },
+                "e": {
+                    "label": "Source of acquisition",
+                    "repeatable": true
+                },
+                "h": {
+                    "label": "Use restrictions",
+                    "repeatable": true
+                },
+                "j": {
+                    "label": "Item status",
+                    "repeatable": true
+                },
+                "l": {
+                    "label": "Temporary location",
+                    "repeatable": true
+                },
+                "p": {
+                    "label": "Piece designation",
+                    "repeatable": true
+                },
+                "r": {
+                    "label": "Invalid or canceled piece designation",
+                    "repeatable": true
+                },
+                "t": {
+                    "label": "Copy number",
+                    "repeatable": false
+                },
+                "x": {
+                    "label": "Nonpublic note",
+                    "repeatable": true
+                },
+                "z": {
+                    "label": "Public note",
+                    "repeatable": true
+                }
+            }
+        },
+        "877": {
+            "label": "Item information--supplementary material",
+            "repeatable": true,
+            "subfields": {
+                "3": {
+                    "label": "Materials specified",
+                    "repeatable": false
+                },
+                "6": {
+                    "label": "Linkage",
+                    "repeatable": false
+                },
+                "8": {
+                    "label": "Sequence number",
+                    "repeatable": true
+                },
+                "a": {
+                    "label": "Internal item number",
+                    "repeatable": false
+                },
+                "b": {
+                    "label": "Invalid or canceled internal item number",
+                    "repeatable": true
+                },
+                "c": {
+                    "label": "Cost",
+                    "repeatable": true
+                },
+                "d": {
+                    "label": "Date acquired",
+                    "repeatable": true
+                },
+                "e": {
+                    "label": "Source of acquisition",
+                    "repeatable": true
+                },
+                "h": {
+                    "label": "Use restrictions",
+                    "repeatable": true
+                },
+                "j": {
+                    "label": "Item status",
+                    "repeatable": true
+                },
+                "l": {
+                    "label": "Temporary location",
+                    "repeatable": true
+                },
+                "p": {
+                    "label": "Piece designation",
+                    "repeatable": true
+                },
+                "r": {
+                    "label": "Invalid or canceled piece designation",
+                    "repeatable": true
+                },
+                "t": {
+                    "label": "Copy number",
+                    "repeatable": false
+                },
+                "x": {
+                    "label": "Nonpublic note",
+                    "repeatable": true
+                },
+                "z": {
+                    "label": "Public note",
+                    "repeatable": true
+                }
+            }
+        },
+        "878": {
+            "label": "Item information--indexes",
+            "repeatable": true,
+            "subfields": {
+                "3": {
+                    "label": "Materials specified",
+                    "repeatable": false
+                },
+                "6": {
+                    "label": "Linkage",
+                    "repeatable": false
+                },
+                "8": {
+                    "label": "Sequence number",
+                    "repeatable": true
+                },
+                "a": {
+                    "label": "Internal item number",
+                    "repeatable": false
+                },
+                "b": {
+                    "label": "Invalid or canceled internal item number",
+                    "repeatable": true
+                },
+                "c": {
+                    "label": "Cost",
+                    "repeatable": true
+                },
+                "d": {
+                    "label": "Date acquired",
+                    "repeatable": true
+                },
+                "e": {
+                    "label": "Source of acquisition",
+                    "repeatable": true
+                },
+                "h": {
+                    "label": "Use restrictions",
+                    "repeatable": true
+                },
+                "j": {
+                    "label": "Item status",
+                    "repeatable": true
+                },
+                "l": {
+                    "label": "Temporary location",
+                    "repeatable": true
+                },
+                "p": {
+                    "label": "Piece designation",
+                    "repeatable": true
+                },
+                "r": {
+                    "label": "Invalid or canceled piece designation",
+                    "repeatable": true
+                },
+                "t": {
+                    "label": "Copy number",
+                    "repeatable": false
+                },
+                "x": {
+                    "label": "Nonpublic note",
+                    "repeatable": true
+                },
+                "z": {
+                    "label": "Public note",
+                    "repeatable": true
+                }
+            }
+        }
+    },
+    "subfields": {
+        "017": {
+            "z": {
+                "label": "Canceled/invalid copyright or legal deposit number",
+                "repeatable": true
+            }
+        },
+        "041": {
+            "g": {
+                "label": "Language code of accompanying material other than librettos and transcripts",
+                "repeatable": true
+            }
+        },
+        "082": {
+            "0": {
+                "label": "Authority record control number or standard number",
+                "repeatable": true
+            },
+            "1": {
+                "label": "Real World Object URI",
+                "repeatable": true
+            }
+        },
+        "083": {
+            "0": {
+                "label": "Authority record control number or standard number",
+                "repeatable": true
+            },
+            "1": {
+                "label": "Real World Object URI",
+                "repeatable": true
+            },
+            "y": {
+                "label": "Table sequence number for internal subarrangement or add table",
+                "repeatable": true
+            }
+        },
+        "085": {
+            "t": {
+                "label": "Digits added from internal subarrangement or add table",
+                "repeatable": true
+            },
+            "v": {
+                "label": "Number in internal subarrangement or add table where instructions are found",
+                "repeatable": true
+            },
+            "w": {
+                "label": "Table identification-Internal subarrangement or add table",
+                "repeatable": true
+            },
+            "y": {
+                "label": "Table sequence number for internal subarrangement or add table",
+                "repeatable": true
+            }
+        },
+        "341": {
+            "0": {
+                "label": "Authority record control number or standard number",
+                "repeatable": true
+            },
+            "1": {
+                "label": "Real World Object URI",
+                "repeatable": true
+            }
+        },
+        "363": {
+            "g": {
+                "label": "Alternative numbering scheme, first level of enumeration",
+                "repeatable": false
+            },
+            "h": {
+                "label": "Alternative numbering scheme, second level of enumeration",
+                "repeatable": false
+            }
+        },
+        "506": {
+            "0": {
+                "label": "Authority record control number or standard number",
+                "repeatable": true
+            },
+            "1": {
+                "label": "Real World Object URI",
+                "repeatable": true
+            }
+        },
+        "508": {
+            "3": {
+                "label": "Materials specified",
+                "repeatable": false
+            }
+        },
+        "511": {
+            "3": {
+                "label": "Materials specified",
+                "repeatable": false
+            }
+        },
+        "540": {
+            "0": {
+                "label": "Authority record control number or standard number",
+                "repeatable": true
+            },
+            "1": {
+                "label": "Real World Object URI",
+                "repeatable": true
+            }
+        },
+        "580": {
+            "5": {
+                "label": "Institution to which field applies",
+                "repeatable": false
+            }
+        },
+        "647": {
+            "4": {
+                "label": "Relationship",
+                "repeatable": true
+            },
+            "e": {
+                "label": "Relator term",
+                "repeatable": true
+            }
+        },
+        "648": {
+            "4": {
+                "label": "Relationship",
+                "repeatable": true
+            },
+            "e": {
+                "label": "Relator term",
+                "repeatable": true
+            }
+        },
+        "654": {
+            "x": {
+                "label": "General subdivision",
+                "repeatable": true
+            }
+        },
+        "662": {
+            "3": {
+                "label": "Materials specified",
+                "repeatable": false
+            }
+        },
+        "760": {
+            "l": {
+                "label": "Data provenance",
+                "repeatable": true
+            }
+        },
+        "762": {
+            "l": {
+                "label": "Data provenance",
+                "repeatable": true
+            }
+        },
+        "765": {
+            "l": {
+                "label": "Data provenance",
+                "repeatable": true
+            }
+        },
+        "767": {
+            "l": {
+                "label": "Data provenance",
+                "repeatable": true
+            }
+        },
+        "770": {
+            "l": {
+                "label": "Data provenance",
+                "repeatable": true
+            }
+        },
+        "772": {
+            "l": {
+                "label": "Data provenance",
+                "repeatable": true
+            }
+        },
+        "773": {
+            "5": {
+                "label": "Institution to which field applies",
+                "repeatable": false
+            },
+            "l": {
+                "label": "Data provenance",
+                "repeatable": true
+            }
+        },
+        "774": {
+            "5": {
+                "label": "Institution to which field applies",
+                "repeatable": false
+            },
+            "l": {
+                "label": "Data provenance",
+                "repeatable": true
+            }
+        },
+        "775": {
+            "e": {
+                "label": "Language code",
+                "repeatable": false
+            },
+            "f": {
+                "label": "Country code",
+                "repeatable": false
+            },
+            "l": {
+                "label": "Data provenance",
+                "repeatable": true
+            }
+        },
+        "776": {
+            "l": {
+                "label": "Data provenance",
+                "repeatable": true
+            }
+        },
+        "777": {
+            "l": {
+                "label": "Data provenance",
+                "repeatable": true
+            }
+        },
+        "780": {
+            "l": {
+                "label": "Data provenance",
+                "repeatable": true
+            }
+        },
+        "785": {
+            "l": {
+                "label": "Data provenance",
+                "repeatable": true
+            }
+        },
+        "786": {
+            "j": {
+                "label": "Period of content",
+                "repeatable": false
+            },
+            "l": {
+                "label": "Data provenance",
+                "repeatable": true
+            },
+            "v": {
+                "label": "Source Contribution",
+                "repeatable": false
+            }
+        },
+        "787": {
+            "5": {
+                "label": "Institution to which field applies",
+                "repeatable": false
+            },
+            "l": {
+                "label": "Data provenance",
+                "repeatable": true
+            }
+        },
+        "811": {
+            "q": {
+                "label": "Name of meeting following jurisdiction name entry element",
+                "repeatable": false
+            }
+        },
+        "880": {
+            "2": {
+                "label": "2",
+                "repeatable": true
+            },
+            "3": {
+                "label": "3",
+                "repeatable": true
+            },
+            "4": {
+                "label": "4",
+                "repeatable": true
+            },
+            "5": {
+                "label": "5",
+                "repeatable": true
+            },
+            "8": {
+                "label": "8",
+                "repeatable": true
+            },
+            "a": {
+                "label": "a",
+                "repeatable": true
+            },
+            "b": {
+                "label": "b",
+                "repeatable": true
+            },
+            "c": {
+                "label": "c",
+                "repeatable": true
+            },
+            "d": {
+                "label": "d",
+                "repeatable": true
+            },
+            "e": {
+                "label": "e",
+                "repeatable": true
+            },
+            "f": {
+                "label": "f",
+                "repeatable": true
+            },
+            "g": {
+                "label": "g",
+                "repeatable": true
+            },
+            "h": {
+                "label": "h",
+                "repeatable": true
+            },
+            "i": {
+                "label": "i",
+                "repeatable": true
+            },
+            "j": {
+                "label": "j",
+                "repeatable": true
+            },
+            "k": {
+                "label": "k",
+                "repeatable": true
+            },
+            "l": {
+                "label": "l",
+                "repeatable": true
+            },
+            "m": {
+                "label": "m",
+                "repeatable": true
+            },
+            "n": {
+                "label": "n",
+                "repeatable": true
+            },
+            "o": {
+                "label": "o",
+                "repeatable": true
+            },
+            "p": {
+                "label": "p",
+                "repeatable": true
+            },
+            "q": {
+                "label": "q",
+                "repeatable": true
+            },
+            "r": {
+                "label": "r",
+                "repeatable": true
+            },
+            "s": {
+                "label": "s",
+                "repeatable": true
+            },
+            "t": {
+                "label": "t",
+                "repeatable": true
+            },
+            "u": {
+                "label": "u",
+                "repeatable": true
+            },
+            "v": {
+                "label": "v",
+                "repeatable": true
+            },
+            "w": {
+                "label": "w",
+                "repeatable": true
+            },
+            "x": {
+                "label": "x",
+                "repeatable": true
+            },
+            "y": {
+                "label": "y",
+                "repeatable": true
+            },
+            "z": {
+                "label": "z",
+                "repeatable": true
+            }
+        },
+        "886": {
+            "0": {
+                "label": "0",
+                "repeatable": true
+            },
+            "1": {
+                "label": "1",
+                "repeatable": true
+            },
+            "3": {
+                "label": "3",
+                "repeatable": true
+            },
+            "4": {
+                "label": "4",
+                "repeatable": true
+            },
+            "5": {
+                "label": "5",
+                "repeatable": true
+            },
+            "6": {
+                "label": "6",
+                "repeatable": true
+            },
+            "8": {
+                "label": "8",
+                "repeatable": true
+            },
+            "c": {
+                "label": "c",
+                "repeatable": true
+            },
+            "d": {
+                "label": "d",
+                "repeatable": true
+            },
+            "e": {
+                "label": "e",
+                "repeatable": true
+            },
+            "f": {
+                "label": "f",
+                "repeatable": true
+            },
+            "g": {
+                "label": "g",
+                "repeatable": true
+            },
+            "h": {
+                "label": "h",
+                "repeatable": true
+            },
+            "i": {
+                "label": "i",
+                "repeatable": true
+            },
+            "j": {
+                "label": "j",
+                "repeatable": true
+            },
+            "k": {
+                "label": "k",
+                "repeatable": true
+            },
+            "l": {
+                "label": "l",
+                "repeatable": true
+            },
+            "m": {
+                "label": "m",
+                "repeatable": true
+            },
+            "n": {
+                "label": "n",
+                "repeatable": true
+            },
+            "o": {
+                "label": "o",
+                "repeatable": true
+            },
+            "p": {
+                "label": "p",
+                "repeatable": true
+            },
+            "q": {
+                "label": "q",
+                "repeatable": true
+            },
+            "r": {
+                "label": "r",
+                "repeatable": true
+            },
+            "s": {
+                "label": "s",
+                "repeatable": true
+            },
+            "t": {
+                "label": "t",
+                "repeatable": true
+            },
+            "u": {
+                "label": "u",
+                "repeatable": true
+            },
+            "v": {
+                "label": "v",
+                "repeatable": true
+            },
+            "w": {
+                "label": "w",
+                "repeatable": true
+            },
+            "x": {
+                "label": "x",
+                "repeatable": true
+            },
+            "y": {
+                "label": "y",
+                "repeatable": true
+            },
+            "z": {
+                "label": "z",
+                "repeatable": true
+            }
+        }
+    }
+}

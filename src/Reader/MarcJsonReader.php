@@ -105,6 +105,7 @@ final class MarcJsonReader extends AbstractReader
     public function readArray(array $data): Record
     {
         $leaderValue = is_string($data['leader'] ?? null) ? $data['leader'] : Leader::DEFAULT;
+        $this->useMarc8($leaderValue);
         $id = null;
         $fields = [];
 

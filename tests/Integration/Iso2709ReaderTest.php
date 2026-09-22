@@ -62,11 +62,12 @@ final class Iso2709ReaderTest extends TestCase
         self::assertLessThan(1024 * 512, memory_get_usage() - $before);
     }
 
-    public function testReportsMarc8AsAnEncodingIssue(): void
+    public function testReportsBytesItCannotMap(): void
     {
         $raw = file_get_contents(self::FIXTURES . 'loc.mrc');
         self::assertIsString($raw);
         $raw[9] = ' ';
+        $raw = str_replace('Introduction', "Intro\x1b(\x99duction", $raw);
 
         $reader = new Iso2709Reader();
         iterator_to_array($reader->readString($raw));

@@ -7,6 +7,7 @@ namespace MirayS\Marc\Reader;
 use DOMDocument;
 use DOMElement;
 use Generator;
+use MirayS\Marc\Encoding\Encoding;
 use MirayS\Marc\Exception\MarcException;
 use MirayS\Marc\Issue\Issue;
 use MirayS\Marc\Record\ControlField;
@@ -29,8 +30,9 @@ final class MarcXmlReader extends AbstractReader
         int $issueLimit = 1000,
         bool $normalize = true,
         private readonly bool $captureRawXml = false,
+        Encoding $encoding = Encoding::Auto,
     ) {
-        parent::__construct($strict, $issueLimit, $normalize);
+        parent::__construct($strict, $issueLimit, $normalize, $encoding);
     }
 
     /**
@@ -192,6 +194,7 @@ final class MarcXmlReader extends AbstractReader
             switch ($child->localName) {
                 case 'leader':
                     $leader = $this->parseLeader($child->textContent);
+                    $this->useMarc8($leader);
 
                     break;
                 case 'controlfield':

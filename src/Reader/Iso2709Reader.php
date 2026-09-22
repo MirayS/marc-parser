@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace MirayS\Marc\Reader;
 
 use Generator;
+use MirayS\Marc\Encoding\Encoding;
 use MirayS\Marc\Exception\MarcException;
 use MirayS\Marc\Issue\Issue;
 use MirayS\Marc\Record\ControlField;
@@ -29,8 +30,9 @@ final class Iso2709Reader extends AbstractReader
         int $issueLimit = 1000,
         bool $normalize = true,
         private readonly bool $captureRaw = false,
+        Encoding $encoding = Encoding::Auto,
     ) {
-        parent::__construct($strict, $issueLimit, $normalize);
+        parent::__construct($strict, $issueLimit, $normalize, $encoding);
     }
 
     /**
@@ -153,13 +155,7 @@ final class Iso2709Reader extends AbstractReader
             return new Record(str_pad($leader, Leader::LENGTH, ' '));
         }
 
-        if ($leader[9] !== 'a') {
-            $this->issues->add(
-                Issue::ENCODING,
-                'leader/09',
-                'Record is not marked as UTF-8; MARC-8 is not transcoded',
-            );
-        }
+        $this->useMarc8($leader);
 
         $fields = [];
 
