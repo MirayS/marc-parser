@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-// MARC-8 Extended Arabic, code set 0x34.
+// MARC-8 Extended Arabic, code set 0x34, from the Library of Congress code tables.
 
 return [
     0xA1 => [0x6FD, false],

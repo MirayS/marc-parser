@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-// MARC-8 Extended Latin (ANSEL), code set 0x45.
+// MARC-8 Extended Latin (ANSEL), code set 0x45, from the Library of Congress code tables.
 
 return [
     0x88 => [0x98, false],
@@ -56,8 +56,7 @@ return [
     0xE8 => [0x308, true],
     0xE9 => [0x30C, true],
     0xEA => [0x30A, true],
-    0xEB => [0xFE20, true],
-    0xEC => [0xFE21, true],
+    0xEB => [0x361, true],
     0xED => [0x315, true],
     0xEE => [0x30B, true],
     0xEF => [0x310, true],
@@ -71,7 +70,6 @@ return [
     0xF7 => [0x326, true],
     0xF8 => [0x31C, true],
     0xF9 => [0x32E, true],
-    0xFA => [0xFE22, true],
-    0xFB => [0xFE23, true],
+    0xFA => [0x360, true],
     0xFE => [0x313, true],
 ];

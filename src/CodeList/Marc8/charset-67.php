@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-// MARC-8 Greek symbols, code set 0x67.
+// MARC-8 Greek Symbols, code set 0x67, from the Library of Congress code tables.
 
 return [
     0x61 => [0x3B1, false],

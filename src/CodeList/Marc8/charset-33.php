@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-// MARC-8 Basic Arabic, code set 0x33.
+// MARC-8 Basic Arabic, code set 0x33, from the Library of Congress code tables.
 
 return [
     0x21 => [0x21, false],

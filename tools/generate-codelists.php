@@ -6,7 +6,6 @@ const SOURCES = [
     'languages' => 'https://id.loc.gov/vocabulary/languages.json',
     'countries' => 'https://id.loc.gov/vocabulary/countries.json',
     'relators' => 'https://id.loc.gov/vocabulary/relators.json',
-    'fields' => 'https://raw.githubusercontent.com/edsu/marctable/main/src/marctable/marc.json',
 ];
 
 const COUNTRY_ALIASES = [
@@ -41,92 +40,6 @@ const COUNTRY_ALIASES = [
 const DEPRECATED_ISO = [
     'AN', 'BU', 'CS', 'CT', 'DD', 'DY', 'EU', 'FQ', 'FX', 'HV', 'JT', 'MI', 'NH', 'NQ', 'NT',
     'PC', 'PU', 'PZ', 'QO', 'QU', 'RH', 'SU', 'TP', 'UK', 'VD', 'WK', 'YD', 'YU', 'ZR', 'ZZ',
-];
-
-const LINKING_ENTRY_SUBFIELDS = [
-    'a' => ['label' => 'Main entry heading', 'repeatable' => false],
-    'b' => ['label' => 'Edition', 'repeatable' => false],
-    'c' => ['label' => 'Qualifying information', 'repeatable' => false],
-    'd' => ['label' => 'Place, publisher, and date of publication', 'repeatable' => false],
-    'e' => ['label' => 'Language code', 'repeatable' => false],
-    'f' => ['label' => 'Country code', 'repeatable' => false],
-    'g' => ['label' => 'Related parts', 'repeatable' => true],
-    'h' => ['label' => 'Physical description', 'repeatable' => false],
-    'i' => ['label' => 'Relationship information', 'repeatable' => true],
-    'j' => ['label' => 'Period of content', 'repeatable' => false],
-    'k' => ['label' => 'Series data for related item', 'repeatable' => true],
-    'l' => ['label' => 'Language', 'repeatable' => false],
-    'm' => ['label' => 'Material-specific details', 'repeatable' => false],
-    'n' => ['label' => 'Note', 'repeatable' => true],
-    'o' => ['label' => 'Other item identifier', 'repeatable' => true],
-    'p' => ['label' => 'Abbreviated title', 'repeatable' => false],
-    'q' => ['label' => 'Enumeration and first page', 'repeatable' => false],
-    'r' => ['label' => 'Report number', 'repeatable' => true],
-    's' => ['label' => 'Uniform title', 'repeatable' => false],
-    't' => ['label' => 'Title', 'repeatable' => false],
-    'u' => ['label' => 'Standard Technical Report Number', 'repeatable' => false],
-    'v' => ['label' => 'Source contribution', 'repeatable' => false],
-    'w' => ['label' => 'Record control number', 'repeatable' => true],
-    'x' => ['label' => 'International Standard Serial Number', 'repeatable' => false],
-    'y' => ['label' => 'CODEN designation', 'repeatable' => false],
-    'z' => ['label' => 'International Standard Book Number', 'repeatable' => true],
-    '0' => ['label' => 'Authority record control number or standard number', 'repeatable' => true],
-    '1' => ['label' => 'Real World Object URI', 'repeatable' => true],
-    '3' => ['label' => 'Materials specified', 'repeatable' => false],
-    '5' => ['label' => 'Institution to which field applies', 'repeatable' => false],
-    '4' => ['label' => 'Relationship', 'repeatable' => true],
-    '6' => ['label' => 'Linkage', 'repeatable' => false],
-    '7' => ['label' => 'Control subfield', 'repeatable' => false],
-    '8' => ['label' => 'Field link and sequence number', 'repeatable' => true],
-];
-
-const LINKING_ENTRY_FIELDS = [
-    '760' => 'Main Series Entry',
-    '762' => 'Subseries Entry',
-    '765' => 'Original Language Entry',
-    '767' => 'Translation Entry',
-    '770' => 'Supplement/Special Issue Entry',
-    '772' => 'Supplement Parent Entry',
-    '773' => 'Host Item Entry',
-    '774' => 'Constituent Unit Entry',
-    '775' => 'Other Edition Entry',
-    '776' => 'Additional Physical Form Entry',
-    '777' => 'Issued With Entry',
-    '780' => 'Preceding Entry',
-    '785' => 'Succeeding Entry',
-    '786' => 'Data Source Entry',
-    '787' => 'Other Relationship Entry',
-];
-
-const FIELD_SUPPLEMENT = [
-    '440' => ['label' => 'Series Statement/Added Entry-Title', 'repeatable' => true, 'subfields' => [
-        'a' => ['label' => 'Title', 'repeatable' => false],
-        'n' => ['label' => 'Number of part/section of a work', 'repeatable' => true],
-        'p' => ['label' => 'Name of part/section of a work', 'repeatable' => true],
-        'v' => ['label' => 'Volume/sequential designation', 'repeatable' => false],
-        'w' => ['label' => 'Bibliographic record control number', 'repeatable' => true],
-        'x' => ['label' => 'International Standard Serial Number', 'repeatable' => false],
-        '0' => ['label' => 'Authority record control number', 'repeatable' => true],
-        '6' => ['label' => 'Linkage', 'repeatable' => false],
-        '8' => ['label' => 'Field link and sequence number', 'repeatable' => true],
-    ]],
-];
-
-const SUBFIELD_SUPPLEMENT = [
-    '533' => ['7' => ['label' => 'Fixed-length data elements of reproduction', 'repeatable' => false]],
-    '655' => ['4' => ['label' => 'Relationship', 'repeatable' => true]],
-    '711' => ['2' => ['label' => 'Source of heading or term', 'repeatable' => false]],
-    '730' => ['7' => ['label' => 'Data provenance', 'repeatable' => true]],
-    '883' => ['d' => ['label' => 'Generation date', 'repeatable' => false], 'x' => ['label' => 'Validity end date', 'repeatable' => false]],
-    '017' => ['a' => ['label' => 'Copyright or legal deposit number', 'repeatable' => true]],
-    '018' => ['a' => ['label' => 'Copyright article-fee code', 'repeatable' => false]],
-    '041' => ['a' => ['label' => 'Language code of text/sound track or separate title', 'repeatable' => true]],
-    '085' => [
-        'a' => ['label' => 'Number where instructions are found-single number or beginning number of span', 'repeatable' => true],
-        's' => ['label' => 'Digits added from internal subarrangement or add table', 'repeatable' => true],
-    ],
-    '810' => ['a' => ['label' => 'Corporate name or jurisdiction name as entry element', 'repeatable' => false]],
-    '811' => ['a' => ['label' => 'Meeting name or jurisdiction name as entry element', 'repeatable' => false]],
 ];
 
 function fetch(string $url): string
@@ -302,7 +215,6 @@ $target = dirname(__DIR__) . '/src/CodeList';
 $languages = labels(decode(fetch(SOURCES['languages'])));
 $relators = labels(decode(fetch(SOURCES['relators'])));
 $countriesRaw = labels(decode(fetch(SOURCES['countries'])));
-$fieldsRaw = decode(fetch(SOURCES['fields']));
 
 $regions = isoRegions();
 $countries = [];
@@ -316,85 +228,6 @@ foreach ($countriesRaw as $code => $name) {
         $unmapped[] = $code;
     }
 }
-
-$fields = [];
-
-foreach ($fieldsRaw['fields'] ?? [] as $tag => $definition) {
-    if (!is_array($definition)) {
-        continue;
-    }
-
-    $subfields = [];
-
-    foreach ($definition['subfields'] ?? [] as $code => $subfield) {
-        if (is_array($subfield)) {
-            $subfields[(string) $code] = [
-                'label' => (string) ($subfield['label'] ?? ''),
-                'repeatable' => (bool) ($subfield['repeatable'] ?? false),
-            ];
-        }
-    }
-
-    foreach (SUBFIELD_SUPPLEMENT[(string) $tag] ?? [] as $code => $supplement) {
-        $subfields[(string) $code] ??= $supplement;
-    }
-
-    ksort($subfields);
-
-    $fields[(string) $tag] = [
-        'label' => (string) ($definition['label'] ?? ''),
-        'repeatable' => (bool) ($definition['repeatable'] ?? false),
-        'subfields' => $subfields,
-    ];
-}
-
-$supplementFile = __DIR__ . '/data/marc21-supplement.json';
-$supplementRaw = file_get_contents($supplementFile);
-$supplement = is_string($supplementRaw) ? decode($supplementRaw) : ['fields' => [], 'subfields' => []];
-
-foreach ($supplement['fields'] ?? [] as $tag => $definition) {
-    if (!is_array($definition)) {
-        continue;
-    }
-
-    $fields[(string) $tag] ??= [
-        'label' => (string) ($definition['label'] ?? ''),
-        'repeatable' => (bool) ($definition['repeatable'] ?? false),
-        'subfields' => $definition['subfields'] ?? [],
-    ];
-}
-
-foreach ($supplement['subfields'] ?? [] as $tag => $codes) {
-    if (!isset($fields[(string) $tag]) || !is_array($codes)) {
-        continue;
-    }
-
-    foreach ($codes as $code => $definition) {
-        $fields[(string) $tag]['subfields'][(string) $code] ??= [
-            'label' => (string) ($definition['label'] ?? ''),
-            'repeatable' => (bool) ($definition['repeatable'] ?? false),
-        ];
-    }
-
-    ksort($fields[(string) $tag]['subfields']);
-}
-
-foreach ($fields as $tag => $definition) {
-    if ($tag >= '010' && $definition['subfields'] !== [] && !isset($definition['subfields']['7'])) {
-        $fields[$tag]['subfields']['7'] = ['label' => 'Data provenance', 'repeatable' => true];
-        ksort($fields[$tag]['subfields']);
-    }
-}
-
-foreach (LINKING_ENTRY_FIELDS as $tag => $label) {
-    $fields[$tag] ??= ['label' => $label, 'repeatable' => true, 'subfields' => LINKING_ENTRY_SUBFIELDS];
-}
-
-foreach (FIELD_SUPPLEMENT as $tag => $definition) {
-    $fields[$tag] ??= $definition;
-}
-
-ksort($fields);
 
 write($target . '/Languages.php', classHeader('Languages', SOURCES['languages'])
     . "    public const CODES = [\n" . exportMap($languages) . "\n    ];\n\n"
@@ -467,71 +300,11 @@ write($target . '/Countries.php', classHeader('Countries', SOURCES['countries'])
 
 PHP);
 
-write($target . '/Fields.php', classHeader('Fields', SOURCES['fields'])
-    . "    public const TAGS = [\n" . exportMap($fields) . "\n    ];\n\n"
-    . <<<'PHP'
-    public static function exists(string $tag): bool
-    {
-        return isset(self::TAGS[$tag]);
-    }
-
-    public static function isLocal(string $tag): bool
-    {
-        return !isset(self::TAGS[$tag]) && str_contains($tag, '9');
-    }
-
-    public static function isLocalSubfield(string $code): bool
-    {
-        return $code === '9';
-    }
-
-    public static function acceptsAnySubfield(string $tag): bool
-    {
-        return $tag === '880';
-    }
-
-    public static function label(string $tag): ?string
-    {
-        return self::TAGS[$tag]['label'] ?? null;
-    }
-
-    public static function isRepeatable(string $tag): ?bool
-    {
-        return self::TAGS[$tag]['repeatable'] ?? null;
-    }
-
-    public static function subfieldLabel(string $tag, string $code): ?string
-    {
-        return self::TAGS[$tag]['subfields'][$code]['label'] ?? null;
-    }
-
-    public static function subfieldExists(string $tag, string $code): bool
-    {
-        return isset(self::TAGS[$tag]['subfields'][$code]);
-    }
-
-    public static function isSubfieldRepeatable(string $tag, string $code): ?bool
-    {
-        return self::TAGS[$tag]['subfields'][$code]['repeatable'] ?? null;
-    }
-
-    /**
-     * @return array<string, array{label: string, repeatable: bool}>
-     */
-    public static function subfields(string $tag): array
-    {
-        return self::TAGS[$tag]['subfields'] ?? [];
-    }
-}
-
-PHP);
-
 printf(
-    "languages %d, relators %d, countries %d (%d without ISO: %s), fields %d\n",
+    "languages %d, relators %d, countries %d (%d without ISO: %s)\n",
     count($languages),
     count($relators),
     count($countries),
     count($unmapped),
     implode(' ', $unmapped),
-    count($fields),
 );

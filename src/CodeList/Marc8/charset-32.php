@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-// MARC-8 Basic Hebrew, code set 0x32.
+// MARC-8 Basic Hebrew, code set 0x32, from the Library of Congress code tables.
 
 return [
     0x21 => [0x21, false],

@@ -17,8 +17,10 @@ use MirayS\Marc\Record\Record;
 
 final class Validator
 {
-    public function __construct(private readonly bool $checkCodeLists = true)
-    {
+    public function __construct(
+        private readonly bool $checkCodeLists = true,
+        private readonly bool $checkIndicators = true,
+    ) {
     }
 
     /**
@@ -100,12 +102,30 @@ final class Validator
         $seen = [];
         $anySubfield = Fields::acceptsAnySubfield($tag);
 
+
         foreach ([$field->getIndicator1(), $field->getIndicator2()] as $number => $indicator) {
+            $position = $number + 1;
+            $path = sprintf('%s/ind%d', $tag, $position);
+
             if (strlen($indicator) !== 1) {
+                $issues[] = new Issue(Issue::INVALID_INDICATOR, $path, 'Indicator must be exactly one character', $id);
+
+                continue;
+            }
+
+            if (!$this->checkIndicators || $anySubfield) {
+                continue;
+            }
+
+            if (Fields::indicatorIsDefined($tag, $position, $indicator) === false) {
                 $issues[] = new Issue(
                     Issue::INVALID_INDICATOR,
-                    sprintf('%s/ind%d', $tag, $number + 1),
-                    'Indicator must be exactly one character',
+                    $path,
+                    sprintf(
+                        'Indicator value %s is not defined for %s',
+                        $indicator === ' ' ? 'blank' : $indicator,
+                        Fields::indicatorLabel($tag, $position) ?? $tag,
+                    ),
                     $id,
                 );
             }

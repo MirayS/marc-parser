@@ -73,12 +73,44 @@ final class ValidatorTest extends TestCase
         self::assertSame([], (new Validator())->validate($record));
     }
 
+    public function testChecksIndicatorValuesAgainstTheStandard(): void
+    {
+        $record = new Record('00000nam a2200000 c 4500', [
+            new DataField('245', '1', '0', [new Subfield('a', 'Fine')]),
+            new DataField('610', '2', ' ', [new Subfield('a', 'Subject without a thesaurus')]),
+            new DataField('246', '3', '9', [new Subfield('a', 'Variant title')]),
+        ]);
+
+        $issues = (new Validator())->validate($record);
+
+        self::assertCount(2, $issues);
+        self::assertSame(Issue::INVALID_INDICATOR, $issues[0]->type);
+        self::assertSame('610/ind2', $issues[0]->path);
+        self::assertSame('246/ind2', $issues[1]->path);
+        self::assertSame([], (new Validator(checkIndicators: false))->validate($record));
+    }
+
+    public function testIndicatorDefinitionsAreAvailable(): void
+    {
+        self::assertSame('Thesaurus', Fields::indicatorLabel('650', 2));
+        self::assertSame(
+            ['0', '1', '2', '3', '4', '5', '6', '7'],
+            array_map('strval', array_keys(Fields::indicatorValues('650', 2))),
+        );
+        self::assertSame('Source specified in subfield $2', Fields::indicatorValues('650', 2)['7']);
+        self::assertTrue(Fields::indicatorIsDefined('245', 1, '1'));
+        self::assertFalse(Fields::indicatorIsDefined('245', 1, '5'));
+        self::assertNull(Fields::indicatorIsDefined('880', 1, '3'));
+        self::assertSame([], Fields::indicatorValues('880', 1));
+    }
+
     public function testCodeListsCoverTheStandard(): void
     {
         self::assertGreaterThan(400, count(Languages::CODES));
         self::assertGreaterThan(300, count(Relators::CODES));
         self::assertGreaterThan(300, count(Countries::CODES));
         self::assertGreaterThan(245, count(Fields::TAGS));
+        self::assertSame('https://www.loc.gov/marc/bibliographic/ecbdlist.html', Fields::SOURCE);
         self::assertTrue(Fields::exists('863'));
         self::assertTrue(Fields::exists('341'));
         self::assertTrue(Fields::subfieldExists('041', 'g'));
@@ -93,7 +125,7 @@ final class ValidatorTest extends TestCase
         self::assertSame('Germany', Countries::name('gw'));
         self::assertSame('DE', Countries::iso3166('gw'));
         self::assertSame('US', Countries::iso3166('cau'));
-        self::assertSame('Title Statement', Fields::label('245'));
+        self::assertSame('Title statement', Fields::label('245'));
         self::assertFalse(Fields::isRepeatable('245'));
         self::assertTrue(Fields::isRepeatable('020'));
         self::assertSame('Title', Fields::subfieldLabel('245', 'a'));

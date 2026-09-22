@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-// MARC-8 Basic Greek, code set 0x53.
+// MARC-8 Basic Greek, code set 0x53, from the Library of Congress code tables.
 
 return [
     0x21 => [0x300, true],

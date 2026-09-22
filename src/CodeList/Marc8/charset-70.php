@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-// MARC-8 Superscripts, code set 0x70.
+// MARC-8 Superscripts, code set 0x70, from the Library of Congress code tables.
 
 return [
     0x28 => [0x207D, false],

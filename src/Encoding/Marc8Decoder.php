@@ -71,6 +71,10 @@ final class Marc8Decoder
                 : Marc8Tables::lookup($this->g1, $code);
 
             if ($entry === null) {
+                if (Marc8Tables::isIgnorable($multibyte || $code <= 0x80 ? $this->g0 : $this->g1, $code)) {
+                    continue;
+                }
+
                 $odd = Marc8Tables::odd($code);
 
                 if ($odd !== null) {

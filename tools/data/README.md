@@ -1,15 +1,19 @@
 # Generator input
 
-`marc8-mapping.json` — MARC-8 to Unicode code tables, one entry per code point with the
-combining flag, for the twelve code sets of the standard (Basic and Extended Latin, Basic and
-Extended Arabic, Basic and Extended Cyrillic, Basic Greek, Greek symbols, Basic Hebrew,
-subscripts, superscripts and EACC). The data comes from the Library of Congress MARC-8 code
-tables, which are in the public domain; this copy was taken from pymarc's transcription of them
-(BSD-2-Clause, Copyright Ed Summers) because www.loc.gov no longer serves `codetables.xml` to
-scripted clients. `tools/generate-marc8-tables.php` turns it into `src/CodeList/Marc8/*.php`.
+`codetables.xml` — the Library of Congress MARC-8 code tables (public domain), covering all
+twelve code sets of the standard: Basic and Extended Latin, Greek symbols, subscripts,
+superscripts, Basic Hebrew, Basic and Extended Cyrillic, Basic and Extended Arabic, Basic Greek
+and the 15 739 East Asian ideographs of EACC. `tools/generate-marc8-tables.php` turns it into
+`src/CodeList/Marc8/*.php`. Where the tables give no Unicode equivalent — the second half of a
+double diacritic, whose first half maps to the single combining character — the decoder consumes
+the byte and emits nothing.
 
-`marc21-supplement.json` — field and subfield definitions of MARC 21 Bibliographic through
-Update No. 34 (July 2022) that the scraped primary source was missing, chiefly the embedded
-holdings block (841-845, 853-855, 863-868, 876-878). Names are the standard's own, cross-checked
-against the Koha MARC 21 default framework. `tools/generate-codelists.php` merges it into
-`src/CodeList/Fields.php`.
+`ecbdlist.html` — the Library of Congress concise list of MARC 21 Bibliographic fields, with
+every field, indicator value and subfield and their repeatability. `tools/generate-fields.php`
+parses it into `src/CodeList/Fields.php`, skipping everything marked `[OBSOLETE]`.
+
+`marc21-supplement.json` — what the bibliographic list does not carry: the embedded holdings
+block (841-845, 853-855, 863-868, 876-878), whose subfields are defined in the MARC 21 Holdings
+format, the superseded but still widespread 440, and a handful of subfields added after that
+page was written. Cross-checked against the Koha MARC 21 framework, which tracks Update No. 34
+(July 2022). `tools/generate-fields.php` merges it in.

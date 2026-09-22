@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-// MARC-8 Subscripts, code set 0x62.
+// MARC-8 Subscripts, code set 0x62, from the Library of Congress code tables.
 
 return [
     0x28 => [0x208D, false],

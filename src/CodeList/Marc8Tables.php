@@ -11,18 +11,18 @@ final class Marc8Tables
     public const EACC = 0x31;
 
     private const FILES = [
-        0x34 => 'charset-34.php',
-        0x45 => 'charset-45.php',
-        0x33 => 'charset-33.php',
-        0x32 => 'charset-32.php',
         0x31 => 'charset-31.php',
-        0x70 => 'charset-70.php',
+        0x32 => 'charset-32.php',
+        0x33 => 'charset-33.php',
+        0x34 => 'charset-34.php',
+        0x42 => 'charset-42.php',
+        0x45 => 'charset-45.php',
+        0x4E => 'charset-4e.php',
         0x51 => 'charset-51.php',
         0x53 => 'charset-53.php',
-        0x42 => 'charset-42.php',
         0x62 => 'charset-62.php',
         0x67 => 'charset-67.php',
-        0x4E => 'charset-4e.php',
+        0x70 => 'charset-70.php',
     ];
 
     private const ODD = [
@@ -32,6 +32,10 @@ final class Marc8Tables
         0x7F2019 => 0x2019,
         0x7F2020 => 0x201D,
         0x7F2122 => 0x2122,
+    ];
+
+    private const IGNORED = [
+        0x45 => [0xEC, 0xFB],
     ];
 
     /** @var array<int, array<int, array{int, bool}>> */
@@ -58,6 +62,11 @@ final class Marc8Tables
     public static function odd(int $code): ?int
     {
         return self::ODD[$code] ?? null;
+    }
+
+    public static function isIgnorable(int $charset, int $code): bool
+    {
+        return in_array($code, self::IGNORED[$charset] ?? [], true);
     }
 
     /**

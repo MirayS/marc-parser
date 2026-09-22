@@ -58,6 +58,16 @@ final class Marc8Test extends TestCase
         })()));
     }
 
+    public function testDecodesDoubleDiacriticsAsTheCodeTablesPrescribe(): void
+    {
+        $decoder = new Marc8Decoder();
+
+        self::assertSame("a\u{361}b", $decoder->decode("\xEBa\xECb"));
+        self::assertSame("a\u{360}b", $decoder->decode("\xFAa\xFBb"));
+        self::assertSame("svi\u{361}ashchennai\u{361}a", $decoder->decode("sv\xEBi\xECashchenna\xEBi\xECa"));
+        self::assertSame([], $decoder->getUnmapped());
+    }
+
     public function testReadsAMarc8FileTheWayPymarcDoes(): void
     {
         $reader = new Iso2709Reader();

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-// MARC-8 Extended Cyrillic, code set 0x51.
+// MARC-8 Extended Cyrillic, code set 0x51, from the Library of Congress code tables.
 
 return [
     0xC0 => [0x491, false],

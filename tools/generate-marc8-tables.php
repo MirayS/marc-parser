@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-$source = $argv[1] ?? dirname(__DIR__) . '/tools/data/marc8-mapping.json';
+$source = $argv[1] ?? __DIR__ . '/data/codetables.xml';
 $target = dirname(__DIR__) . '/src/CodeList/Marc8';
 
 $raw = file_get_contents($source);
@@ -12,41 +12,56 @@ if ($raw === false) {
     exit(1);
 }
 
-$data = json_decode($raw, true, 512, JSON_THROW_ON_ERROR);
+$document = new SimpleXMLElement($raw, LIBXML_PARSEHUGE | LIBXML_COMPACT);
 
-if (!is_array($data) || !isset($data['codesets']) || !is_array($data['codesets'])) {
-    fwrite(STDERR, "Mapping file has no codesets\n");
-    exit(1);
-}
-
-$names = [
-    0x42 => 'Basic Latin (ASCII)',
-    0x45 => 'Extended Latin (ANSEL)',
-    0x31 => 'Chinese, Japanese, Korean (EACC)',
-    0x32 => 'Basic Hebrew',
-    0x33 => 'Basic Arabic',
-    0x34 => 'Extended Arabic',
-    0x4E => 'Basic Cyrillic',
-    0x51 => 'Extended Cyrillic',
-    0x53 => 'Basic Greek',
-    0x62 => 'Subscripts',
-    0x67 => 'Greek symbols',
-    0x70 => 'Superscripts',
+$odd = [
+    0x21203D => 0x2026,
+    0x212040 => 0x201C,
+    0x7F2014 => 0x2014,
+    0x7F2019 => 0x2019,
+    0x7F2020 => 0x201D,
+    0x7F2122 => 0x2122,
 ];
 
-$header = <<<'TXT'
-<?php
-
-declare(strict_types=1);
-
-TXT;
-
 $written = [];
+$names = [];
+$ignored = [];
 
-foreach ($data['codesets'] as $charset => $table) {
-    $charset = (int) $charset;
+foreach ($document->xpath('//characterSet') ?: [] as $characterSet) {
+    $charset = hexdec((string) $characterSet['ISOcode']);
+    $name = (string) $characterSet['name'];
+    $table = [];
+    $skippedCodes = [];
 
-    if (!is_array($table)) {
+    foreach ($characterSet->xpath('.//code') ?: [] as $code) {
+        $ucs = trim((string) $code->ucs);
+
+        if ($ucs === '') {
+            $marc = trim((string) $code->marc);
+
+            if ($marc !== '') {
+                $skippedCodes[] = hexdec($marc);
+            }
+
+            continue;
+        }
+
+        $combining = trim((string) $code->isCombining) === 'true';
+
+        foreach (['marc', 'alt'] as $element) {
+            foreach ($code->{$element} as $value) {
+                $marc = trim((string) $value);
+
+                if ($element === 'alt' || $marc === '') {
+                    continue;
+                }
+
+                $table[hexdec($marc)] = [hexdec($ucs), $combining];
+            }
+        }
+    }
+
+    if ($table === []) {
         continue;
     }
 
@@ -54,35 +69,32 @@ foreach ($data['codesets'] as $charset => $table) {
 
     $lines = [];
 
-    foreach ($table as $code => $entry) {
-        if (!is_array($entry)) {
-            continue;
-        }
-
-        $lines[] = sprintf(
-            '    0x%X => [0x%X, %s],',
-            (int) $code,
-            (int) $entry[0],
-            ($entry[1] ?? false) ? 'true' : 'false',
-        );
+    foreach ($table as $marc => [$unicode, $combining]) {
+        $lines[] = sprintf('    0x%X => [0x%X, %s],', $marc, $unicode, $combining ? 'true' : 'false');
     }
 
     $file = sprintf('%s/charset-%02x.php', $target, $charset);
-    $contents = $header
-        . sprintf("\n// MARC-8 %s, code set 0x%02X.\n\nreturn [\n", $names[$charset] ?? 'code set', $charset)
+    file_put_contents(
+        $file,
+        "<?php\n\ndeclare(strict_types=1);\n"
+        . sprintf("\n// MARC-8 %s, code set 0x%02X, from the Library of Congress code tables.\n\nreturn [\n", $name, $charset)
         . implode("\n", $lines)
-        . "\n];\n";
+        . "\n];\n",
+    );
 
-    file_put_contents($file, $contents);
-    $written[$charset] = count($lines);
-    printf("charset-%02x.php (%d entries)\n", $charset, count($lines));
+    $written[$charset] = count($table);
+    $names[$charset] = $name;
+    $ignored[$charset] = $skippedCodes;
+    printf(
+        "charset-%02x.php  %-34s %6d characters%s\n",
+        $charset,
+        $name,
+        count($table),
+        $skippedCodes === [] ? '' : sprintf(' (%d without a Unicode mapping)', count($skippedCodes)),
+    );
 }
 
-$odd = [];
-
-foreach ($data['odd'] ?? [] as $code => $unicode) {
-    $odd[] = sprintf('        0x%X => 0x%X,', (int) $code, (int) $unicode);
-}
+ksort($written);
 
 $codesets = [];
 
@@ -90,7 +102,28 @@ foreach (array_keys($written) as $charset) {
     $codesets[] = sprintf("        0x%02X => 'charset-%02x.php',", $charset, $charset);
 }
 
-$class = $header . <<<'PHP'
+$ignoredLines = [];
+
+foreach ($ignored as $charset => $codes) {
+    if ($codes === []) {
+        continue;
+    }
+
+    sort($codes);
+    $ignoredLines[] = sprintf(
+        '        0x%02X => [%s],',
+        $charset,
+        implode(', ', array_map(static fn (int $code): string => sprintf('0x%X', $code), $codes)),
+    );
+}
+
+$oddLines = [];
+
+foreach ($odd as $code => $unicode) {
+    $oddLines[] = sprintf('        0x%X => 0x%X,', $code, $unicode);
+}
+
+$class = "<?php\n\ndeclare(strict_types=1);\n" . <<<'PHP'
 
 namespace MirayS\Marc\CodeList;
 
@@ -106,6 +139,10 @@ __CODESETS__
 
     private const ODD = [
 __ODD__
+    ];
+
+    private const IGNORED = [
+__IGNORED__
     ];
 
     /** @var array<int, array<int, array{int, bool}>> */
@@ -134,6 +171,11 @@ __ODD__
         return self::ODD[$code] ?? null;
     }
 
+    public static function isIgnorable(int $charset, int $code): bool
+    {
+        return in_array($code, self::IGNORED[$charset] ?? [], true);
+    }
+
     /**
      * @return array<int, array{int, bool}>
      */
@@ -159,10 +201,10 @@ __ODD__
 PHP;
 
 $class = str_replace(
-    ['__CODESETS__', '__ODD__'],
-    [implode("\n", $codesets), implode("\n", $odd)],
+    ['__CODESETS__', '__ODD__', '__IGNORED__'],
+    [implode("\n", $codesets), implode("\n", $oddLines), implode("\n", $ignoredLines)],
     $class,
 );
 
 file_put_contents(dirname($target) . '/Marc8Tables.php', $class);
-printf("Marc8Tables.php (%d code sets, %d odd mappings)\n", count($codesets), count($odd));
+printf("Marc8Tables.php (%d code sets, %d characters, %d odd mappings)\n", count($codesets), array_sum($written), count($oddLines));

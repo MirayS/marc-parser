@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-// MARC-8 Basic Latin (ASCII), code set 0x42.
+// MARC-8 Basic Latin (ASCII), code set 0x42, from the Library of Congress code tables.
 
 return [
     0x1B => [0x1B, false],
