@@ -107,11 +107,18 @@ const FIELD_SUPPLEMENT = [
 ];
 
 const SUBFIELD_SUPPLEMENT = [
+    '533' => ['7' => ['label' => 'Fixed-length data elements of reproduction', 'repeatable' => false]],
+    '655' => ['4' => ['label' => 'Relationship', 'repeatable' => true]],
+    '711' => ['2' => ['label' => 'Source of heading or term', 'repeatable' => false]],
+    '730' => ['7' => ['label' => 'Data provenance', 'repeatable' => true]],
     '883' => ['d' => ['label' => 'Generation date', 'repeatable' => false], 'x' => ['label' => 'Validity end date', 'repeatable' => false]],
     '017' => ['a' => ['label' => 'Copyright or legal deposit number', 'repeatable' => true]],
     '018' => ['a' => ['label' => 'Copyright article-fee code', 'repeatable' => false]],
     '041' => ['a' => ['label' => 'Language code of text/sound track or separate title', 'repeatable' => true]],
-    '085' => ['a' => ['label' => 'Number where instructions are found-single number or beginning number of span', 'repeatable' => true]],
+    '085' => [
+        'a' => ['label' => 'Number where instructions are found-single number or beginning number of span', 'repeatable' => true],
+        's' => ['label' => 'Digits added from internal subarrangement or add table', 'repeatable' => true],
+    ],
     '810' => ['a' => ['label' => 'Corporate name or jurisdiction name as entry element', 'repeatable' => false]],
     '811' => ['a' => ['label' => 'Meeting name or jurisdiction name as entry element', 'repeatable' => false]],
 ];
@@ -335,6 +342,13 @@ foreach ($fieldsRaw['fields'] ?? [] as $tag => $definition) {
     ];
 }
 
+foreach ($fields as $tag => $definition) {
+    if ($tag >= '010' && $definition['subfields'] !== [] && !isset($definition['subfields']['7'])) {
+        $fields[$tag]['subfields']['7'] = ['label' => 'Data provenance', 'repeatable' => true];
+        ksort($fields[$tag]['subfields']);
+    }
+}
+
 foreach (LINKING_ENTRY_FIELDS as $tag => $label) {
     $fields[$tag] ??= ['label' => $label, 'repeatable' => true, 'subfields' => LINKING_ENTRY_SUBFIELDS];
 }
@@ -432,6 +446,11 @@ write($target . '/Fields.php', classHeader('Fields', SOURCES['fields'])
     public static function isLocalSubfield(string $code): bool
     {
         return $code === '9';
+    }
+
+    public static function acceptsAnySubfield(string $tag): bool
+    {
+        return $tag === '880';
     }
 
     public static function label(string $tag): ?string

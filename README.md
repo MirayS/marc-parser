@@ -19,6 +19,21 @@ composer require mirays/marc
 
 ## Reading
 
+The facade picks the serialisation itself — by sniffing the content, then by the extension — so a
+path is all it needs:
+
+```php
+foreach (\MirayS\Marc\Marc::books('dnb_all_dnbmarc.1.mrc.gz') as $book) {
+    echo implode(',', $book->isbn13s()), ' ', $book->title(), PHP_EOL;
+}
+
+\MirayS\Marc\Marc::read('oai-page.xml');        // records instead of shortcuts
+\MirayS\Marc\Marc::readString($payload);        // same detection over a string
+\MirayS\Marc\Marc::detect('dump.ndjson');       // Format::MarcJson
+```
+
+Take the reader yourself when you need its counters and issues:
+
 ```php
 $reader = new \MirayS\Marc\Reader\Iso2709Reader();
 

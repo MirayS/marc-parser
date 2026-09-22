@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace MirayS\Marc\Reader;
 
-use MirayS\Marc\Exception\MarcException;
+use Generator;
 use MirayS\Marc\Issue\Issue;
 use MirayS\Marc\Issue\IssueCollector;
-use ZipArchive;
 
 abstract class AbstractReader
 {
@@ -25,6 +24,23 @@ abstract class AbstractReader
     ) {
         $this->issues = new IssueCollector($strict, $issueLimit);
     }
+
+    /**
+     * @return Generator<int, \MirayS\Marc\Record\Record>
+     */
+    abstract public function read(string $source): Generator;
+
+    /**
+     * @return Generator<int, \MirayS\Marc\Record\Record>
+     */
+    abstract public function readString(string $data): Generator;
+
+    /**
+     * @param resource $stream
+     *
+     * @return Generator<int, \MirayS\Marc\Record\Record>
+     */
+    abstract public function readStream($stream): Generator;
 
     public function getRecordCount(): int
     {
@@ -64,48 +80,6 @@ abstract class AbstractReader
 
     protected function resolveUri(string $source): string
     {
-        if (preg_match('#^[a-z0-9.+-]+://#i', $source) === 1) {
-            return $source;
-        }
-
-        if (!is_file($source) || !is_readable($source)) {
-            throw new MarcException(sprintf('MARC file %s is not readable', $source));
-        }
-
-        $extension = strtolower(pathinfo($source, PATHINFO_EXTENSION));
-
-        return match ($extension) {
-            'gz', 'gzip' => 'compress.zlib://' . $source,
-            'bz2' => 'compress.bzip2://' . $source,
-            'zip' => 'zip://' . $source . '#' . $this->firstZipEntry($source),
-            default => $source,
-        };
-    }
-
-    private function firstZipEntry(string $source): string
-    {
-        if (!class_exists(ZipArchive::class)) {
-            throw new MarcException('ext-zip is required to read zipped MARC files');
-        }
-
-        $zip = new ZipArchive();
-
-        if ($zip->open($source) !== true) {
-            throw new MarcException(sprintf('Cannot open zip archive %s', $source));
-        }
-
-        for ($i = 0; $i < $zip->numFiles; $i++) {
-            $name = (string) $zip->getNameIndex($i);
-
-            if (!str_ends_with($name, '/')) {
-                $zip->close();
-
-                return $name;
-            }
-        }
-
-        $zip->close();
-
-        throw new MarcException(sprintf('No entry found in %s', $source));
+        return SourceUri::resolve($source);
     }
 }

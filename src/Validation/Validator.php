@@ -98,6 +98,7 @@ final class Validator
         $issues = [];
         $tag = $field->getTag();
         $seen = [];
+        $anySubfield = Fields::acceptsAnySubfield($tag);
 
         foreach ([$field->getIndicator1(), $field->getIndicator2()] as $number => $indicator) {
             if (strlen($indicator) !== 1) {
@@ -116,14 +117,14 @@ final class Validator
             $path = $tag . '$' . $code;
 
             if (!Fields::subfieldExists($tag, $code)) {
-                if (!Fields::isLocalSubfield($code)) {
+                if (!Fields::isLocalSubfield($code) && !Fields::acceptsAnySubfield($tag)) {
                     $issues[] = new Issue(Issue::UNKNOWN_SUBFIELD, $path, 'Subfield is not defined for this field', $id);
                 }
 
                 continue;
             }
 
-            if ($seen[$code] === 2 && Fields::isSubfieldRepeatable($tag, $code) === false) {
+            if (!$anySubfield && $seen[$code] === 2 && Fields::isSubfieldRepeatable($tag, $code) === false) {
                 $issues[] = new Issue(Issue::NOT_REPEATABLE, $path, 'Subfield is not repeatable', $id);
             }
 
