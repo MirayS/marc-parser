@@ -1,0 +1,49 @@
+{
+    "name": "mirays/marc",
+    "description": "Streaming MARC 21 parser for PHP: ISO 2709, MARCXML and MARC-in-JSON",
+    "type": "library",
+    "license": "MPL-2.0",
+    "keywords": ["marc", "marc21", "marcxml", "iso2709", "bibliographic", "library", "metadata", "streaming"],
+    "authors": [
+        {
+            "name": "Vitali Kuzmich",
+            "homepage": "https://github.com/MirayS",
+            "email": "my@mirays.by",
+            "role": "Maintainer"
+        }
+    ],
+    "require": {
+        "php": ">=8.2",
+        "ext-dom": "*",
+        "ext-libxml": "*",
+        "ext-xmlreader": "*",
+        "ext-mbstring": "*",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.5",
+        "phpstan/phpstan": "^2.1"
+    },
+    "suggest": {
+        "ext-intl": "Unicode NFC normalisation of record values",
+        "ext-zlib": "Read gzipped MARC files",
+        "ext-zip": "Read MARC files directly from zip archives"
+    },
+    "autoload": {
+        "psr-4": {
+            "MirayS\\Marc\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MirayS\\Marc\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "analyse": "phpstan analyse --memory-limit=512M"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

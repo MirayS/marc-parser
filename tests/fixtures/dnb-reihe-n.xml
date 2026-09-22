@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd"><responseDate>2026-09-22T11:45:16Z</responseDate><request metadataPrefix="MARC21plus-1-xml" set="dnb-all:reiheN" verb="ListRecords" from="2026-09-17T00:00:00Z" until="2026-09-17T23:59:59Z">https://services.dnb.de/oai/repository</request><ListRecords xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd"><record><header><identifier>oai:dnb.de/dnb-all:reiheN/1418500429</identifier><datestamp>2026-09-17T05:53:45Z</datestamp><setSpec>dnb-all:reiheN</setSpec></header><metadata><record xmlns="http://www.loc.gov/MARC21/slim" type="Bibliographic">
+    <leader>00000nam a22000008c 4500</leader>
+    <controlfield tag="001">1418500429</controlfield>
+    <controlfield tag="003">DE-101</controlfield>
+    <controlfield tag="005">20260917075345.0</controlfield>
+    <controlfield tag="007">tu</controlfield>
+    <controlfield tag="008">260904s2099    gw ||||| |||| 00||||ger  </controlfield>
+    <datafield tag="015" ind1=" " ind2=" ">
+      <subfield code="a">26,N37</subfield>
+      <subfield code="2">dnb</subfield>
+    </datafield>
+    <datafield tag="016" ind1="7" ind2=" ">
+      <subfield code="2">DE-101</subfield>
+      <subfield code="a">1418500429</subfield>
+    </datafield>
+    <datafield tag="020" ind1=" " ind2=" ">
+      <subfield code="a">9783758526008</subfield>
+      <subfield code="c">Festeinband : EUR 20.90 (DE), EUR 21.50 (AT)</subfield>
+      <subfield code="9">978-3-7585-2600-8</subfield>
+    </datafield>
+    <datafield tag="020" ind1=" " ind2=" ">
+      <subfield code="a">3758526000</subfield>
+      <subfield code="9">3-7585-2600-0</subfield>
+    </datafield>
+    <datafield tag="024" ind1="3" ind2=" ">
+      <subfield code="a">9783758526008</subfield>
+    </datafield>
+    <datafield tag="028" ind1="5" ind2="2">
+      <subfield code="a">Bestellnummer 22192-09</subfield>
+    </datafield>
+    <datafield tag="035" ind1=" " ind2=" ">
+      <subfield code="a">(DE-599)DNB1418500429</subfield>
+    </datafield>
+    <datafield tag="035" ind1=" " ind2=" ">
+      <subfield code="a">(OCoLC)1615410711</subfield>
+    </datafield>
+    <datafield tag="040" ind1=" " ind2=" ">
+      <subfield code="a">1145</subfield>
+      <subfield code="b">ger</subfield>
+      <subfield code="c">DE-101</subfield>
+      <subfield code="d">9999</subfield>
+    </datafield>
+    <datafield tag="041" ind1=" " ind2=" ">
+      <subfield code="a">ger</subfield>
+    </datafield>
+    <datafield tag="044" ind1=" " ind2=" ">
+      <subfield code="c">XA-DE-NW</subfield>
+    </datafield>
+    <datafield tag="082" ind1="7" ind2="4">
+      <subfield code="8">13\p</subfield>
+      <subfield code="a">S</subfield>
+      <subfield code="q">DE-101</subfield>
+      <subfield code="2">23sdnb</subfield>
+    </datafield>
+    <datafield tag="100" ind1="1" ind2=" ">
+      <subfield code="8">1\p</subfield>
+      <subfield code="0">(DE-588)1062524802</subfield>
+      <subfield code="0">https://d-nb.info/gnd/1062524802</subfield>
+      <subfield code="0">(DE-101)1062524802</subfield>
+      <subfield code="0">(isni)0000000066739466</subfield>
+      <subfield code="a">Lüpertz, Viktor</subfield>
+      <subfield code="e">Verfasser</subfield>
+      <subfield code="4">aut</subfield>
+      <subfield code="2">gnd</subfield>
+    </datafield>
+    <datafield tag="245" ind1="1" ind2="0">
+      <subfield code="a">Lösungen zu 22185 Versicherungen und Finanzanlagen, Band 3, Proximus 5</subfield>
+      <subfield code="c">Viktor Lüpertz, Elisabeth Grill, Sebastian Lindner, Uwe Thews, Katja Wasmund [und weitere]</subfield>
+    </datafield>
+    <datafield tag="250" ind1=" " ind2=" ">
+      <subfield code="a">9. Auflage</subfield>
+    </datafield>
+    <datafield tag="263" ind1=" " ind2=" ">
+      <subfield code="a">209901</subfield>
+    </datafield>
+    <datafield tag="264" ind1=" " ind2="1">
+      <subfield code="b">Europa-Lehrmittel</subfield>
+      <subfield code="c">2099</subfield>
+    </datafield>
+    <datafield tag="264" ind1=" " ind2="1">
+      <subfield code="a">Haan</subfield>
+      <subfield code="b">Europa-Lehrmittel</subfield>
+      <subfield code="c">2099</subfield>
+    </datafield>
+    <datafield tag="300" ind1=" " ind2=" ">
+      <subfield code="a">149 Seiten</subfield>
+      <subfield code="c">24 cm</subfield>
+    </datafield>
+    <datafield tag="336" ind1=" " ind2=" ">
+      <subfield code="a">Text</subfield>
+      <subfield code="b">txt</subfield>
+      <subfield code="2">rdacontent</subfield>
+    </datafield>
+    <datafield tag="337" ind1=" " ind2=" ">
+      <subfield code="a">ohne Hilfsmittel zu benutzen</subfield>
+      <subfield code="b">n</subfield>
+      <subfield code="2">rdamedia</subfield>
+    </datafield>
+    <datafield tag="338" ind1=" " ind2=" ">
+      <subfield code="a">Band</subfield>
+      <subfield code="b">nc</subfield>
+      <subfield code="2">rdacarrier</subfield>
+    </datafield>
+    <datafield tag="653" ind1=" " ind2=" ">
+      <subfield code="a">(Produktform)Book</subfield>
+    </datafield>
+    <datafield tag="653" ind1=" " ind2=" ">
+      <subfield code="a">(VLB-WN)1830: Hardcover, Softcover / Schule, Lernen/Berufsschulbücher, Fachschulbücher</subfield>
+    </datafield>
+    <datafield tag="653" ind1=" " ind2=" ">
+      <subfield code="a">AUSBILDUNG: Ausbildung</subfield>
+    </datafield>
+    <datafield tag="653" ind1=" " ind2=" ">
+      <subfield code="a">FINANZANLAGEN: Finanzanlagen</subfield>
+    </datafield>
+    <datafield tag="653" ind1=" " ind2=" ">
+      <subfield code="a">VERSICHERUNGEN: Versicherungen</subfield>
+    </datafield>
+    <datafield tag="653" ind1=" " ind2=" ">
+      <subfield code="a">VERSICHERUNGSWIRT.: Versicherungswirt.</subfield>
+    </datafield>
+    <datafield tag="653" ind1=" " ind2=" ">
+      <subfield code="a">WIRTSCHAFTSLEHRE: Wirtschaftslehre</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2=" ">
+      <subfield code="8">2\p</subfield>
+      <subfield code="0">(DE-588)133998878</subfield>
+      <subfield code="0">https://d-nb.info/gnd/133998878</subfield>
+      <subfield code="0">(DE-101)133998878</subfield>
+      <subfield code="0">(isni)0000000529226748</subfield>
+      <subfield code="a">Grill, Elisabeth</subfield>
+      <subfield code="e">Verfasser</subfield>
+      <subfield code="4">aut</subfield>
+      <subfield code="2">gnd</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2=" ">
+      <subfield code="8">3\p</subfield>
+      <subfield code="0">(isni)0000000529229594</subfield>
+      <subfield code="a">Lindner, Sebastian</subfield>
+      <subfield code="e">Verfasser</subfield>
+      <subfield code="4">aut</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2=" ">
+      <subfield code="8">4\p</subfield>
+      <subfield code="0">(isni)0000000529233614</subfield>
+      <subfield code="a">Thews, Uwe</subfield>
+      <subfield code="e">Verfasser</subfield>
+      <subfield code="4">aut</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2=" ">
+      <subfield code="8">5\p</subfield>
+      <subfield code="0">(isni)0000000529234182</subfield>
+      <subfield code="a">Wasmund, Katja</subfield>
+      <subfield code="e">Verfasser</subfield>
+      <subfield code="4">aut</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2=" ">
+      <subfield code="8">6\p</subfield>
+      <subfield code="0">(isni)0000000529234844</subfield>
+      <subfield code="a">Zimmer, Isabel</subfield>
+      <subfield code="e">Verfasser</subfield>
+      <subfield code="4">aut</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2=" ">
+      <subfield code="8">7\p</subfield>
+      <subfield code="0">(DE-588)133998878</subfield>
+      <subfield code="0">https://d-nb.info/gnd/133998878</subfield>
+      <subfield code="0">(DE-101)133998878</subfield>
+      <subfield code="0">(isni)0000000529226748</subfield>
+      <subfield code="a">Grill, Elisabeth</subfield>
+      <subfield code="e">Verfasser</subfield>
+      <subfield code="4">aut</subfield>
+      <subfield code="2">gnd</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2=" ">
+      <subfield code="8">8\p</subfield>
+      <subfield code="0">(isni)0000000529234844</subfield>
+      <subfield code="a">Zimmer, Isabel</subfield>
+      <subfield code="e">Verfasser</subfield>
+      <subfield code="4">aut</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2=" ">
+      <subfield code="8">9\p</subfield>
+      <subfield code="0">(isni)0000000529233614</subfield>
+      <subfield code="a">Thews, Uwe</subfield>
+      <subfield code="e">Verfasser</subfield>
+      <subfield code="4">aut</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2=" ">
+      <subfield code="8">10\p</subfield>
+      <subfield code="0">(isni)0000000529234182</subfield>
+      <subfield code="a">Wasmund, Katja</subfield>
+      <subfield code="e">Verfasser</subfield>
+      <subfield code="4">aut</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2=" ">
+      <subfield code="8">11\p</subfield>
+      <subfield code="0">(isni)0000000529229594</subfield>
+      <subfield code="a">Lindner, Sebastian</subfield>
+      <subfield code="e">Verfasser</subfield>
+      <subfield code="4">aut</subfield>
+    </datafield>
+    <datafield tag="710" ind1="2" ind2=" ">
+      <subfield code="8">12\p</subfield>
+      <subfield code="0">(DE-588)106429457X</subfield>
+      <subfield code="0">https://d-nb.info/gnd/106429457X</subfield>
+      <subfield code="0">(DE-101)106429457X</subfield>
+      <subfield code="a">Verlag Europa-Lehrmittel Nourney, Vollmer GmbH &amp; Co.</subfield>
+      <subfield code="e">Verlag</subfield>
+      <subfield code="4">pbl</subfield>
+      <subfield code="2">gnd</subfield>
+    </datafield>
+    <datafield tag="780" ind1="0" ind2="0">
+      <subfield code="i">Vorangegangen ist</subfield>
+      <subfield code="z">9783758522192</subfield>
+    </datafield>
+    <datafield tag="856" ind1="4" ind2="2">
+      <subfield code="m">X:MVB</subfield>
+      <subfield code="q">text/html</subfield>
+      <subfield code="u">https://services.dnb.de/plus/idn/1418500429/blurb/</subfield>
+      <subfield code="3">Inhaltstext</subfield>
+    </datafield>
+    <datafield tag="856" ind1="4" ind2="2">
+      <subfield code="m">X:MVB</subfield>
+      <subfield code="q">text/html</subfield>
+      <subfield code="u">www.europa-lehrmittel.de</subfield>
+      <subfield code="3">Inhaltstext</subfield>
+    </datafield>
+    <datafield tag="883" ind1="0" ind2=" ">
+      <subfield code="8">1\p</subfield>
+      <subfield code="a">ptc001</subfield>
+      <subfield code="d">20260915</subfield>
+      <subfield code="q">DE-101</subfield>
+      <subfield code="u">https://d-nb.info/provenance/plan#ptc001</subfield>
+    </datafield>
+    <datafield tag="883" ind1="0" ind2=" ">
+      <subfield code="8">2\p</subfield>
+      <subfield code="a">ptc001</subfield>
+      <subfield code="d">20260915</subfield>
+      <subfield code="q">DE-101</subfield>
+      <subfield code="u">https://d-nb.info/provenance/plan#ptc001</subfield>
+    </datafield>
+    <datafield tag="883" ind1="1" ind2=" ">
+      <subfield code="8">3\p</subfield>
+      <subfield code="a">vlb</subfield>
+      <subfield code="d">20260904</subfield>
+      <subfield code="q">DE-101</subfield>
+      <subfield code="u">https://d-nb.info/provenance/plan#vlb</subfield>
+    </datafield>
+    <datafield tag="883" ind1="1" ind2=" ">
+      <subfield code="8">4\p</subfield>
+      <subfield code="a">vlb</subfield>
+      <subfield code="d">20260904</subfield>
+      <subfield code="q">DE-101</subfield>
+      <subfield code="u">https://d-nb.info/provenance/plan#vlb</subfield>
+    </datafield>
+    <datafield tag="883" ind1="1" ind2=" ">
+      <subfield code="8">5\p</subfield>
+      <subfield code="a">vlb</subfield>
+      <subfield code="d">20260904</subfield>
+      <subfield code="q">DE-101</subfield>
+      <subfield code="u">https://d-nb.info/provenance/plan#vlb</subfield>
+    </datafield>
+    <datafield tag="883" ind1="1" ind2=" ">
+      <subfield code="8">6\p</subfield>
+      <subfield code="a">vlb</subfield>
+      <subfield code="d">20260904</subfield>
+      <subfield code="q">DE-101</subfield>
+      <subfield code="u">https://d-nb.info/provenance/plan#vlb</subfield>
+    </datafield>
+    <datafield tag="883" ind1="0" ind2=" ">
+      <subfield code="8">7\p</subfield>
+      <subfield code="a">ptc001</subfield>
+      <subfield code="d">20260915</subfield>
+      <subfield code="q">DE-101</subfield>
+      <subfield code="u">https://d-nb.info/provenance/plan#ptc001</subfield>
+    </datafield>
+    <datafield tag="883" ind1="1" ind2=" ">
+      <subfield code="8">8\p</subfield>
+      <subfield code="a">vlb</subfield>
+      <subfield code="d">20260904</subfield>
+      <subfield code="q">DE-101</subfield>
+      <subfield code="u">https://d-nb.info/provenance/plan#vlb</subfield>
+    </datafield>
+    <datafield tag="883" ind1="1" ind2=" ">
+      <subfield code="8">9\p</subfield>
+      <subfield code="a">vlb</subfield>
+      <subfield code="d">20260904</subfield>
+      <subfield code="q">DE-101</subfield>
+      <subfield code="u">https://d-nb.info/provenance/plan#vlb</subfield>
+    </datafield>
+    <datafield tag="883" ind1="1" ind2=" ">
+      <subfield code="8">10\p</subfield>
+      <subfield code="a">vlb</subfield>
+      <subfield code="d">20260904</subfield>
+      <subfield code="q">DE-101</subfield>
+      <subfield code="u">https://d-nb.info/provenance/plan#vlb</subfield>
+    </datafield>
+    <datafield tag="883" ind1="1" ind2=" ">
+      <subfield code="8">11\p</subfield>
+      <subfield code="a">vlb</subfield>
+      <subfield code="d">20260904</subfield>
+      <subfield code="q">DE-101</subfield>
+      <subfield code="u">https://d-nb.info/provenance/plan#vlb</subfield>
+    </datafield>
+    <datafield tag="883" ind1="1" ind2=" ">
+      <subfield code="8">12\p</subfield>
+      <subfield code="a">adb</subfield>
+      <subfield code="d">20260904</subfield>
+      <subfield code="q">DE-101</subfield>
+      <subfield code="u">https://d-nb.info/provenance/plan#adb</subfield>
+    </datafield>
+    <datafield tag="883" ind1="1" ind2=" ">
+      <subfield code="8">13\p</subfield>
+      <subfield code="a">vlb</subfield>
+      <subfield code="d">20260904</subfield>
+      <subfield code="q">DE-101</subfield>
+      <subfield code="u">https://d-nb.info/provenance/plan#vlb</subfield>
+    </datafield>
+    <datafield tag="925" ind1="w" ind2=" ">
+      <subfield code="a">c</subfield>
+    </datafield>
+    <datafield tag="926" ind1="1" ind2=" ">
+      <subfield code="a">JNUM</subfield>
+      <subfield code="o">93</subfield>
+      <subfield code="q">Publisher</subfield>
+      <subfield code="v">1.6</subfield>
+      <subfield code="x">Unterrichtsmaterialien</subfield>
+    </datafield>
+    <datafield tag="926" ind1="2" ind2=" ">
+      <subfield code="a">KFFX</subfield>
+      <subfield code="o">93</subfield>
+      <subfield code="q">Publisher</subfield>
+      <subfield code="v">1.6</subfield>
+      <subfield code="x">Bankwesen und Finanzen: Lehrbücher, Handbücher</subfield>
+    </datafield>
+    <datafield tag="926" ind1="2" ind2=" ">
+      <subfield code="a">4Z-DE-UHPA</subfield>
+      <subfield code="o">97</subfield>
+      <subfield code="q">Publisher</subfield>
+      <subfield code="v">1.6</subfield>
+      <subfield code="x">Für Ausbildungsberufe als Bank-, Versicherungsfachleute</subfield>
+    </datafield>
+  </record></metadata></record><record><header><identifier>oai:dnb.de/dnb-all:reiheN/1418499595</identifier><datestamp>2026-09-17T05:53:45Z</datestamp><setSpec>dnb-all:reiheN</setSpec></header><metadata><record xmlns="http://www.loc.gov/MARC21/slim" type="Bibliographic">
+    <leader>00000nam a22000008c 4500</leader>
+    <controlfield tag="001">1418499595</controlfield>
+    <controlfield tag="003">DE-101</controlfield>
+    <controlfield tag="005">20260917075345.0</controlfield>
+    <controlfield tag="007">tu</controlfield>
+    <controlfield tag="008">260904s2099    gw ||||| |||| 00||||ger  </controlfield>
+    <datafield tag="015" ind1=" " ind2=" ">
+      <subfield code="a">26,N37</subfield>
+      <subfield code="2">dnb</subfield>
+    </datafield>
+    <datafield tag="016" ind1="7" ind2=" ">
+      <subfield code="2">DE-101</subfield>
+      <subfield code="a">1418499595</subfield>
+    </datafield>
+    <datafield tag="020" ind1=" " ind2=" ">
+      <subfield code="a">9783758525995</subfield>
+      <subfield code="c">Festeinband : EUR 36.90 (DE), EUR 38.00 (AT)</subfield>
+      <subfield code="9">978-3-7585-2599-5</subfield>
+    </datafield>
+    <datafield tag="020" ind1=" " ind2=" ">
+      <subfield code="a">3758525993</subfield>
+      <subfield code="9">3-7585-2599-3</subfield>
+    </datafield>
+    <datafield tag="024" ind1="3" ind2=" ">
+      <subfield code="a">9783758525995</subfield>
+    </datafield>
+    <datafield tag="028" ind1="5" ind2="2">
+      <subfield code="a">Bestellnummer 22185-09</subfield>
+    </datafield>
+    <datafield tag="035" ind1=" " ind2=" ">
+      <subfield code="a">(DE-599)DNB1418499595</subfield>
+    </datafield>
+    <datafield tag="035" ind1=" " ind2=" ">
+      <subfield code="a">(OCoLC)1615406325</subfield>
+    </datafield>
+    <datafield tag="040" ind1=" " ind2=" ">
+      <subfield code="a">1145</subfield>
+      <subfield code="b">ger</subfield>
+      <subfield code="c">DE-101</subfield>
+      <subfield code="d">9999</subfield>
+    </datafield>
+    <datafield tag="041" ind1=" " ind2=" ">
+      <subfield code="a">ger</subfield>
+    </datafield>
+    <datafield tag="044" ind1=" " ind2=" ">
+      <subfield code="c">XA-DE-NW</subfield>
+    </datafield>
+    <datafield tag="082" ind1="7" ind2="4">
+      <subfield code="8">9\p</subfield>
+      <subfield code="a">S</subfield>
+      <subfield code="q">DE-101</subfield>
+      <subfield code="2">23sdnb</subfield>
+    </datafield>
+    <datafield tag="100" ind1="1" ind2=" ">
+      <subfield code="8">1\p</subfield>
+      <subfield code="0">(DE-588)1062524802</subfield>
+      <subfield code="0">https://d-nb.info/gnd/1062524802</subfield>
+      <subfield code="0">(DE-101)1062524802</subfield>
+      <subfield code="0">(isni)0000000066739466</subfield>
+      <subfield code="a">Lüpertz, Viktor</subfield>
+      <subfield code="e">Verfasser</subfield>
+      <subfield code="4">aut</subfield>
+      <subfield code="2">gnd</subfield>
+    </datafield>
+    <datafield tag="245" ind1="1" ind2="0">
+      <subfield code="a">Versicherungen und Finanzanlagen Band 3 - Proximus 5</subfield>
+      <subfield code="c">Viktor Lüpertz, Uwe Thews, Katja Wasmund, Wolfgang Irmer, Isabel Zimmer [und weitere]</subfield>
+    </datafield>
+    <datafield tag="250" ind1=" " ind2=" ">
+      <subfield code="a">9. Auflage</subfield>
+    </datafield>
+    <datafield tag="263" ind1=" " ind2=" ">
+      <subfield code="a">209901</subfield>
+    </datafield>
+    <datafield tag="264" ind1=" " ind2="1">
+      <subfield code="b">Europa-Lehrmittel</subfield>
+      <subfield code="c">2099</subfield>
+    </datafield>
+    <datafield tag="264" ind1=" " ind2="1">
+      <subfield code="a">Haan</subfield>
+      <subfield code="b">Europa-Lehrmittel</subfield>
+      <subfield code="c">2099</subfield>
+    </datafield>
+    <datafield tag="300" ind1=" " ind2=" ">
+      <subfield code="a">749 Seiten</subfield>
+      <subfield code="c">24 cm</subfield>
+    </datafield>
+    <datafield tag="336" ind1=" " ind2=" ">
+      <subfield code="a">Text</subfield>
+      <subfield code="b">txt</subfield>
+      <subfield code="2">rdacontent</subfield>
+    </datafield>
+    <datafield tag="337" ind1=" " ind2=" ">
+      <subfield code="a">ohne Hilfsmittel zu benutzen</subfield>
+      <subfield code="b">n</subfield>
+      <subfield code="2">rdamedia</subfield>
+    </datafield>
+    <datafield tag="338" ind1=" " ind2=" ">
+      <subfield code="a">Band</subfield>
+      <subfield code="b">nc</subfield>
+      <subfield code="2">rdacarrier</subfield>
+    </datafield>
+    <datafield tag="653" ind1=" " ind2=" ">
+      <subfield code="a">(Produktform)Book</subfield>
+    </datafield>
+    <datafield tag="653" ind1=" " ind2=" ">
+      <subfield code="a">(VLB-WN)1830: Hardcover, Softcover / Schule, Lernen/Berufsschulbücher, Fachschulbücher</subfield>
+    </datafield>
+    <datafield tag="653" ind1=" " ind2=" ">
+      <subfield code="a">AUSBILDUNG: Ausbildung</subfield>
+    </datafield>
+    <datafield tag="653" ind1=" " ind2=" ">
+      <subfield code="a">FINANZANLAGEN: Finanzanlagen</subfield>
+    </datafield>
+    <datafield tag="653" ind1=" " ind2=" ">
+      <subfield code="a">VERSICHERUNGEN: Versicherungen</subfield>
+    </datafield>
+    <datafield tag="653" ind1=" " ind2=" ">
+      <subfield code="a">VERSICHERUNGSWIRT.: Versicherungswirt.</subfield>
+    </datafield>
+    <datafield tag="653" ind1=" " ind2=" ">
+      <subfield code="a">WIRTSCHAFTSLEHRE: Wirtschaftslehre</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2=" ">
+      <subfield code="8">2\p</subfield>
+      <subfield code="0">(isni)0000000529233614</subfield>
+      <subfield code="a">Thews, Uwe</subfield>
+      <subfield code="e">Verfasser</subfield>
+      <subfield code="4">aut</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2=" ">
+      <subfield code="8">3\p</subfield>
+      <subfield code="0">(isni)0000000529234182</subfield>
+      <subfield code="a">Wasmund, Katja</subfield>
+      <subfield code="e">Verfasser</subfield>
+      <subfield code="4">aut</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2=" ">
+      <subfield code="8">4\p</subfield>
+      <subfield code="0">(isni)0000000529228102</subfield>
+      <subfield code="a">Irmer, Wolfgang</subfield>
+      <subfield code="e">Verfasser</subfield>
+      <subfield code="4">aut</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2=" ">
+      <subfield code="8">5\p</subfield>
+      <subfield code="0">(isni)0000000529234844</subfield>
+      <subfield code="a">Zimmer, Isabel</subfield>
+      <subfield code="e">Verfasser</subfield>
+      <subfield code="4">aut</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2=" ">
+      <subfield code="8">6\p</subfield>
+      <subfield code="0">(isni)000000052922972X</subfield>
+      <subfield code="a">Lubahn, Michael</subfield>
+      <subfield code="e">Verfasser</subfield>
+      <subfield code="4">aut</subfield>
+    </datafield>
+    <datafield tag="700" ind1="1" ind2=" ">
+      <subfield code="8">7\p</subfield>
+      <subfield code="0">(isni)0000000529231491</subfield>
+      <subfield code="a">Reinhardt, Frederik</subfield>
+      <subfield code="e">Verfasser</subfield>
+      <subfield code="4">aut</subfield>
+    </datafield>
+    <datafield tag="710" ind1="2" ind2=" ">
+      <subfield code="8">8\p</subfield>
+      <subfield code="0">(DE-588)106429457X</subfield>
+      <subfield code="0">https://d-nb.info/gnd/106429457X</subfield>
+      <subfield code="0">(DE-101)106429457X</subfield>
+      <subfield code="a">Verlag Europa-Lehrmittel Nourney, Vollmer GmbH &amp; Co.</subfield>
+      <subfield code="e">Verlag</subfield>
+      <subfield code="4">pbl</subfield>
+      <subfield code="2">gnd</subfield>
+    </datafield>
+    <datafield tag="780" ind1="0" ind2="0">
+      <subfield code="i">Vorangegangen ist</subfield>
+      <subfield code="z">9783758522185</subfield>
+    </datafield>
+    <datafield tag="856" ind1="4" ind2="2">
+      <subfield code="m">X:MVB</subfield>
+      <subfield code="q">text/html</subfield>
+      <subfield code="u">https://services.dnb.de/plus/idn/1418499595/blurb/</subfield>
+      <subfield code="3">Inhaltstext</subfield>
+    </datafield>
+    <datafield tag="856" ind1="4" ind2="2">
+      <subfield code="m">X:MVB</subfield>
+      <subfield code="q">text/html</subfield>
+      <subfield code="u">www.europa-lehrmittel.de</subfield>
+      <subfield code="3">Inhaltstext</subfield>
+    </datafield>
+    <datafield tag="883" ind1="0" ind2=" ">
+      <subfield code="8">1\p</subfield>
+      <subfield code="a">ptc001</subfield>
+      <subfield code="d">20260915</subfield>
+      <subfield code="q">DE-101</subfield>
+      <subfield code="u">https://d-nb.info/provenance/plan#ptc001</subfield>
+    </datafield>
+    <datafield tag="883" ind1="1" ind2=" ">
+      <subfield code="8">2\p</subfield>
+      <subfield code="a">vlb</subfield>
+      <subfield code="d">20260904</subfield>
+      <subfield code="q">DE-101</subfield>
+      <subfield code="u">https://d-nb.info/provenance/plan#vlb</subfield>
+    </datafield>
+    <datafield tag="883" ind1="1" ind2=" ">
+      <subfield code="8">3\p</subfield>
+      <subfield code="a">vlb</subfield>
+      <subfield code="d">20260904</subfield>
+      <subfield code="q">DE-101</subfield>
+      <subfield code="u">https://d-nb.info/provenance/plan#vlb</subfield>
+    </datafield>
+    <datafield tag="883" ind1="1" ind2=" ">
+      <subfield code="8">4\p</subfield>
+      <subfield code="a">vlb</subfield>
+      <subfield code="d">20260904</subfield>
+      <subfield code="q">DE-101</subfield>
+      <subfield code="u">https://d-nb.info/provenance/plan#vlb</subfield>
+    </datafield>
+    <datafield tag="883" ind1="1" ind2=" ">
+      <subfield code="8">5\p</subfield>
+      <subfield code="a">vlb</subfield>
+      <subfield code="d">20260904</subfield>
+      <subfield code="q">DE-101</subfield>
+      <subfield code="u">https://d-nb.info/provenance/plan#vlb</subfield>
+    </datafield>
+    <datafield tag="883" ind1="1" ind2=" ">
+      <subfield code="8">6\p</subfield>
+      <subfield code="a">vlb</subfield>
+      <subfield code="d">20260904</subfield>
+      <subfield code="q">DE-101</subfield>
+      <subfield code="u">https://d-nb.info/provenance/plan#vlb</subfield>
+    </datafield>
+    <datafield tag="883" ind1="1" ind2=" ">
+      <subfield code="8">7\p</subfield>
+      <subfield code="a">vlb</subfield>
+      <subfield code="d">20260904</subfield>
+      <subfield code="q">DE-101</subfield>
+      <subfield code="u">https://d-nb.info/provenance/plan#vlb</subfield>
+    </datafield>
+    <datafield tag="883" ind1="1" ind2=" ">
+      <subfield code="8">8\p</subfield>
+      <subfield code="a">adb</subfield>
+      <subfield code="d">20260904</subfield>
+      <subfield code="q">DE-101</subfield>
+      <subfield code="u">https://d-nb.info/provenance/plan#adb</subfield>
+    </datafield>
+    <datafield tag="883" ind1="1" ind2=" ">
+      <subfield code="8">9\p</subfield>
+      <subfield code="a">vlb</subfield>
+      <subfield code="d">20260904</subfield>
+      <subfield code="q">DE-101</subfield>
+      <subfield code="u">https://d-nb.info/provenance/plan#vlb</subfield>
+    </datafield>
+    <datafield tag="925" ind1="w" ind2=" ">
+      <subfield code="a">c</subfield>
+    </datafield>
+    <datafield tag="926" ind1="1" ind2=" ">
+      <subfield code="a">KFFX</subfield>
+      <subfield code="o">93</subfield>
+      <subfield code="q">Publisher</subfield>
+      <subfield code="v">1.6</subfield>
+      <subfield code="x">Bankwesen und Finanzen: Lehrbücher, Handbücher</subfield>
+    </datafield>
+    <datafield tag="926" ind1="2" ind2=" ">
+      <subfield code="a">4Z-DE-UHPA</subfield>
+      <subfield code="o">97</subfield>
+      <subfield code="q">Publisher</subfield>
+      <subfield code="v">1.6</subfield>
+      <subfield code="x">Für Ausbildungsberufe als Bank-, Versicherungsfachleute</subfield>
+    </datafield>
+  </record></metadata></record></ListRecords></OAI-PMH>

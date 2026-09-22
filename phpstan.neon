@@ -1,0 +1,10 @@
+parameters:
+    level: 5
+    paths:
+        - src
+        - tools
+    excludePaths:
+        - src/CodeList/Languages.php
+        - src/CodeList/Countries.php
+        - src/CodeList/Relators.php
+        - src/CodeList/Fields.php
