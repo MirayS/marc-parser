@@ -81,6 +81,11 @@ $binary = (new \MirayS\Marc\Writer\Iso2709Writer())->write($record);
 Every pair of formats round-trips to an equal record, and both the binary and the JSON output are
 byte-for-byte identical to what pymarc writes for the same input.
 
+ISO 2709 cannot hold a record longer than 99 999 bytes or a field longer than 9 999, so
+`Iso2709Writer` refuses those rather than writing a leader or directory that silently lies about
+the record; `clampOversized: true` caps them the way some vendors do. MARCXML and MARC-in-JSON
+have no such limit.
+
 ## The record
 
 `Record` keeps the leader and the fields in document order and answers queries directly:
@@ -103,6 +108,38 @@ $record->getFixedField008()?->getDate1();
 $record->getFixedField008()?->get('literaryForm');
 $record->getFixedFields007()[0]->isOnlineResource();
 $record->getFixedFields006()[0]->getMaterialType();
+```
+
+## Records other than bibliographic
+
+The leader decides which format a record is in, and the fixed fields and the dictionary follow it:
+
+```php
+$record->getLeader()->getRecordFormat();   // RecordFormat::Authority
+$record->getFixedField008()?->get('kindOfRecord');
+CodeList\Dictionary::for($record->getLeader()->getRecordFormat());
+```
+
+`008` is read with the positions of its own format — bibliographic (per material type), authority
+or holdings — and `CodeList\Fields`, `CodeList\AuthorityFields` and `CodeList\HoldingsFields`
+carry the three dictionaries. Classification and community information records parse like any
+other, but have no dictionary yet, so the validator only checks their structure.
+
+## Scripts and 880
+
+Fields carrying a non-Latin form of another field are linked through `$6`:
+
+```php
+$title = $record->getDataField('245');
+
+$record->getAlternateGraphics($title);     // the 880 fields holding the original script
+$record->getLinkedField($alternate);       // and back to 245
+$record->getScriptPairs();                 // every linked pair in the record
+$record->getUnlinkedAlternateGraphics();   // 880s with occurrence 00
+
+$alternate->getLinkage()?->script;         // 'Cyrl'
+$alternate->getLinkage()?->isRightToLeft();
+Bibliographic::of($record)->titleOriginalScript();
 ```
 
 ## Bibliographic shortcuts

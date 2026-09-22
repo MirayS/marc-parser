@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace MirayS\Marc\Validation;
 
 use MirayS\Marc\CodeList\Countries;
-use MirayS\Marc\CodeList\Fields;
+use MirayS\Marc\CodeList\Dictionary;
 use MirayS\Marc\CodeList\Languages;
 use MirayS\Marc\CodeList\Relators;
 use MirayS\Marc\Issue\Issue;
@@ -30,6 +30,7 @@ final class Validator
     {
         $issues = [];
         $id = $record->getId();
+        $dictionary = Dictionary::for($record->getLeader()->getRecordFormat());
 
         if (strlen($record->getRawLeader()) !== Leader::LENGTH) {
             $issues[] = new Issue(Issue::INVALID_LEADER, 'leader', 'Leader must be 24 bytes', $id);
@@ -41,15 +42,23 @@ final class Validator
             $tag = $field->getTag();
             $seenTags[$tag] = ($seenTags[$tag] ?? 0) + 1;
 
-            if (!Fields::exists($tag)) {
-                if (!Fields::isLocal($tag)) {
+            if ($dictionary === null) {
+                if ($field instanceof ControlField) {
+                    $issues = array_merge($issues, $this->validateControlField($field, $id));
+                }
+
+                continue;
+            }
+
+            if (!$dictionary->exists($tag)) {
+                if (!$dictionary->isLocal($tag)) {
                     $issues[] = new Issue(Issue::UNKNOWN_TAG, $tag, 'Tag is not defined in MARC 21 bibliographic', $id);
                 }
 
                 continue;
             }
 
-            if ($seenTags[$tag] === 2 && Fields::isRepeatable($tag) === false) {
+            if ($seenTags[$tag] === 2 && $dictionary->isRepeatable($tag) === false) {
                 $issues[] = new Issue(Issue::NOT_REPEATABLE, $tag, 'Field is not repeatable', $id);
             }
 
@@ -60,7 +69,7 @@ final class Validator
             }
 
             if ($field instanceof DataField) {
-                $issues = array_merge($issues, $this->validateDataField($field, $id));
+                $issues = array_merge($issues, $this->validateDataField($field, $dictionary, $id));
             }
         }
 
@@ -95,12 +104,12 @@ final class Validator
     /**
      * @return list<Issue>
      */
-    private function validateDataField(DataField $field, ?string $id): array
+    private function validateDataField(DataField $field, Dictionary $dictionary, ?string $id): array
     {
         $issues = [];
         $tag = $field->getTag();
         $seen = [];
-        $anySubfield = Fields::acceptsAnySubfield($tag);
+        $anySubfield = $dictionary->acceptsAnySubfield($tag);
 
 
         foreach ([$field->getIndicator1(), $field->getIndicator2()] as $number => $indicator) {
@@ -117,14 +126,14 @@ final class Validator
                 continue;
             }
 
-            if (Fields::indicatorIsDefined($tag, $position, $indicator) === false) {
+            if ($dictionary->indicatorIsDefined($tag, $position, $indicator) === false) {
                 $issues[] = new Issue(
                     Issue::INVALID_INDICATOR,
                     $path,
                     sprintf(
                         'Indicator value %s is not defined for %s',
                         $indicator === ' ' ? 'blank' : $indicator,
-                        Fields::indicatorLabel($tag, $position) ?? $tag,
+                        $dictionary->indicatorLabel($tag, $position) ?? $tag,
                     ),
                     $id,
                 );
@@ -136,15 +145,15 @@ final class Validator
             $seen[$code] = ($seen[$code] ?? 0) + 1;
             $path = $tag . '$' . $code;
 
-            if (!Fields::subfieldExists($tag, $code)) {
-                if (!Fields::isLocalSubfield($code) && !Fields::acceptsAnySubfield($tag)) {
+            if (!$dictionary->subfieldExists($tag, $code)) {
+                if (!$dictionary->isLocalSubfield($code) && !$anySubfield) {
                     $issues[] = new Issue(Issue::UNKNOWN_SUBFIELD, $path, 'Subfield is not defined for this field', $id);
                 }
 
                 continue;
             }
 
-            if (!$anySubfield && $seen[$code] === 2 && Fields::isSubfieldRepeatable($tag, $code) === false) {
+            if (!$anySubfield && $seen[$code] === 2 && $dictionary->isSubfieldRepeatable($tag, $code) === false) {
                 $issues[] = new Issue(Issue::NOT_REPEATABLE, $path, 'Subfield is not repeatable', $id);
             }
 

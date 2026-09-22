@@ -8,8 +8,11 @@ final class FixedField008 extends PositionalField
 {
     public const LENGTH = 40;
 
-    public function __construct(string $value, private readonly MaterialType $material = MaterialType::Books)
-    {
+    public function __construct(
+        string $value,
+        private readonly MaterialType $material = MaterialType::Books,
+        private readonly RecordFormat $format = RecordFormat::Bibliographic,
+    ) {
         parent::__construct($value);
     }
 
@@ -18,23 +21,72 @@ final class FixedField008 extends PositionalField
         return $this->material;
     }
 
+    public function getRecordFormat(): RecordFormat
+    {
+        return $this->format;
+    }
+
     public function positions(): array
     {
-        return array_merge(
-            [
+        return match ($this->format) {
+            RecordFormat::Bibliographic => array_merge(
+                [
+                    'dateEnteredOnFile' => [0, 6],
+                    'typeOfDate' => [6, 1],
+                    'date1' => [7, 4],
+                    'date2' => [11, 4],
+                    'placeOfPublication' => [15, 3],
+                ],
+                MaterialPositions::for($this->material, 18),
+                [
+                    'language' => [35, 3],
+                    'modifiedRecord' => [38, 1],
+                    'catalogingSource' => [39, 1],
+                ],
+            ),
+            RecordFormat::Authority => [
                 'dateEnteredOnFile' => [0, 6],
-                'typeOfDate' => [6, 1],
-                'date1' => [7, 4],
-                'date2' => [11, 4],
-                'placeOfPublication' => [15, 3],
-            ],
-            MaterialPositions::for($this->material, 18),
-            [
-                'language' => [35, 3],
+                'directOrIndirectGeographicSubdivision' => [6, 1],
+                'romanizationScheme' => [7, 1],
+                'languageOfCatalog' => [8, 1],
+                'kindOfRecord' => [9, 1],
+                'descriptiveCatalogingRules' => [10, 1],
+                'subjectHeadingSystem' => [11, 1],
+                'typeOfSeries' => [12, 1],
+                'numberedOrUnnumberedSeries' => [13, 1],
+                'headingUseMainOrAddedEntry' => [14, 1],
+                'headingUseSubjectAddedEntry' => [15, 1],
+                'headingUseSeriesAddedEntry' => [16, 1],
+                'typeOfSubjectSubdivision' => [17, 1],
+                'typeOfGovernmentAgency' => [28, 1],
+                'referenceEvaluation' => [29, 1],
+                'recordUpdateInProcess' => [31, 1],
+                'undifferentiatedPersonalName' => [32, 1],
+                'levelOfEstablishment' => [33, 1],
                 'modifiedRecord' => [38, 1],
                 'catalogingSource' => [39, 1],
             ],
-        );
+            RecordFormat::Holdings => [
+                'dateEnteredOnFile' => [0, 6],
+                'receiptOrAcquisitionStatus' => [6, 1],
+                'methodOfAcquisition' => [7, 1],
+                'expectedAcquisitionEndDate' => [8, 4],
+                'generalRetentionPolicy' => [12, 1],
+                'policyType' => [13, 1],
+                'numberOfUnits' => [14, 1],
+                'unitType' => [15, 1],
+                'completeness' => [16, 1],
+                'numberOfCopiesReported' => [17, 3],
+                'lendingPolicy' => [20, 1],
+                'reproductionPolicy' => [21, 1],
+                'language' => [22, 3],
+                'separateOrCompositeCopyReport' => [25, 1],
+                'dateOfReport' => [26, 6],
+            ],
+            RecordFormat::Classification, RecordFormat::CommunityInformation => [
+                'dateEnteredOnFile' => [0, 6],
+            ],
+        };
     }
 
     public function getDateEnteredOnFile(): ?string
@@ -65,6 +117,11 @@ final class FixedField008 extends PositionalField
     public function getLanguage(): ?string
     {
         return $this->trimCode($this->get('language'));
+    }
+
+    public function getKindOfRecord(): ?string
+    {
+        return $this->trimCode($this->get('kindOfRecord'));
     }
 
     public function getTargetAudience(): ?string

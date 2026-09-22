@@ -6,6 +6,8 @@ namespace MirayS\Marc\CodeList;
 
 final class Fields
 {
+    public const FORMAT = 'MARC 21 Bibliographic';
+
     public const SOURCE = 'https://www.loc.gov/marc/bibliographic/ecbdlist.html';
 
     public const TAGS = [
@@ -3601,7 +3603,7 @@ final class Fields
                 'label' => 'Series tracing policy',
                 'values' => [
                     '0' => 'Series not traced',
-                    '1' => 'Series traced differently',
+                    '1' => 'Series traced [REDEFINED]',
                 ],
             ],
             2 => [

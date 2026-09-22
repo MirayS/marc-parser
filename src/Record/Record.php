@@ -134,8 +134,89 @@ final class Record
     public function getFixedField008(): ?FixedField008
     {
         $value = $this->getControlValue('008');
+        $leader = $this->getLeader();
 
-        return $value === null ? null : new FixedField008($value, $this->getLeader()->getMaterialType());
+        return $value === null
+            ? null
+            : new FixedField008($value, $leader->getMaterialType(), $leader->getRecordFormat());
+    }
+
+    /**
+     * @return list<DataField>
+     */
+    public function getAlternateGraphics(DataField $field): array
+    {
+        if ($field->getTag() === '880') {
+            return [];
+        }
+
+        $linkage = $field->getLinkage();
+
+        if ($linkage === null || $linkage->isUnlinked()) {
+            return [];
+        }
+
+        return array_values(array_filter(
+            $this->getDataFields('880'),
+            static function (DataField $candidate) use ($field, $linkage): bool {
+                $candidateLinkage = $candidate->getLinkage();
+
+                return $candidateLinkage !== null
+                    && $candidateLinkage->pointsTo($field->getTag(), $linkage->occurrence);
+            },
+        ));
+    }
+
+    public function getLinkedField(DataField $field): ?DataField
+    {
+        $linkage = $field->getLinkage();
+
+        if ($linkage === null || $linkage->isUnlinked()) {
+            return null;
+        }
+
+        foreach ($this->getDataFields($linkage->tag) as $candidate) {
+            $candidateLinkage = $candidate->getLinkage();
+
+            if ($candidateLinkage !== null && $candidateLinkage->pointsTo($field->getTag(), $linkage->occurrence)) {
+                return $candidate;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @return list<array{DataField, list<DataField>}>
+     */
+    public function getScriptPairs(): array
+    {
+        $pairs = [];
+
+        foreach ($this->getDataFields() as $field) {
+            if ($field->getTag() === '880') {
+                continue;
+            }
+
+            $alternates = $this->getAlternateGraphics($field);
+
+            if ($alternates !== []) {
+                $pairs[] = [$field, $alternates];
+            }
+        }
+
+        return $pairs;
+    }
+
+    /**
+     * @return list<DataField>
+     */
+    public function getUnlinkedAlternateGraphics(): array
+    {
+        return array_values(array_filter(
+            $this->getDataFields('880'),
+            static fn (DataField $field): bool => $field->getLinkage()?->isUnlinked() ?? true,
+        ));
     }
 
     /** @return list<FixedField007> */

@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace MirayS\Marc\Tests\Unit;
 
+use MirayS\Marc\Exception\MarcException;
 use MirayS\Marc\Reader\Iso2709Reader;
 use MirayS\Marc\Record\ControlField;
 use MirayS\Marc\Record\DataField;
+use MirayS\Marc\Record\Leader;
 use MirayS\Marc\Record\Record;
 use MirayS\Marc\Record\Subfield;
 use MirayS\Marc\Writer\Iso2709Writer;
@@ -33,6 +35,52 @@ final class Iso2709WriterTest extends TestCase
         self::assertSame(62, strlen($written));
         self::assertSame(62, (int) substr($written, 0, 5));
         self::assertSame(49, (int) substr($written, 12, 5));
+    }
+
+    public function testRefusesRecordsTheFormatCannotHold(): void
+    {
+        $record = new Record(Leader::DEFAULT, $this->manyFields(20));
+
+        $this->expectException(MarcException::class);
+        $this->expectExceptionMessageMatches('/\d{6} bytes long/');
+
+        (new Iso2709Writer())->write($record);
+    }
+
+    public function testRefusesFieldsLongerThanADirectoryEntry(): void
+    {
+        $record = new Record(Leader::DEFAULT, [
+            new DataField('505', ' ', ' ', [new Subfield('a', str_repeat('y', 12000))]),
+        ]);
+
+        $this->expectException(MarcException::class);
+        $this->expectExceptionMessageMatches('/Field 505 .* at most 9999/');
+
+        (new Iso2709Writer())->write($record);
+    }
+
+    public function testClampsOnlyWhenAskedTo(): void
+    {
+        $record = new Record(Leader::DEFAULT, $this->manyFields(20));
+
+        $written = (new Iso2709Writer(clampOversized: true))->write($record);
+
+        self::assertSame('99999', substr($written, 0, 5));
+        self::assertGreaterThan(99999, strlen($written));
+    }
+
+    /**
+     * @return list<DataField>
+     */
+    private function manyFields(int $count): array
+    {
+        $fields = [];
+
+        for ($i = 0; $i < $count; $i++) {
+            $fields[] = new DataField('500', ' ', ' ', [new Subfield('a', str_repeat('x', 9000))]);
+        }
+
+        return $fields;
     }
 
     public function testWrittenRecordIsReadableAgain(): void

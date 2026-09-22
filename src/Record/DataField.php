@@ -81,6 +81,13 @@ final class DataField implements Field
         return $this->subfield($code) !== null;
     }
 
+    public function getLinkage(): ?Linkage
+    {
+        $value = $this->subfield('6');
+
+        return $value === null ? null : Linkage::fromSubfield($value);
+    }
+
     public function concat(string $codes, string $glue = ' '): ?string
     {
         $values = $this->subfieldValues($codes);

@@ -84,6 +84,16 @@ final class Leader extends PositionalField
         return MaterialType::fromLeader($this->getTypeOfRecord(), $this->getBibliographicLevel());
     }
 
+    public function getRecordFormat(): RecordFormat
+    {
+        return RecordFormat::fromLeader($this->getTypeOfRecord());
+    }
+
+    public function isBibliographic(): bool
+    {
+        return $this->getRecordFormat() === RecordFormat::Bibliographic;
+    }
+
     public function isUnicode(): bool
     {
         return $this->getCharacterCodingScheme() === 'a';

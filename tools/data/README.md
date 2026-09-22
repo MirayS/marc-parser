@@ -12,6 +12,10 @@ the byte and emits nothing.
 every field, indicator value and subfield and their repeatability. `tools/generate-fields.php`
 parses it into `src/CodeList/Fields.php`, skipping everything marked `[OBSOLETE]`.
 
+`ecadlist.html` and `echdlist.html` — the same concise lists for MARC 21 Authority and MARC 21
+Holdings, parsed by the same generator into `src/CodeList/AuthorityFields.php` and
+`src/CodeList/HoldingsFields.php`.
+
 `marc21-supplement.json` — what the bibliographic list does not carry: the embedded holdings
 block (841-845, 853-855, 863-868, 876-878), whose subfields are defined in the MARC 21 Holdings
 format, the superseded but still widespread 440, and a handful of subfields added after that

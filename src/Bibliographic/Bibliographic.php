@@ -131,6 +131,25 @@ final class Bibliographic
         return $title === '' ? null : $title;
     }
 
+    public function titleOriginalScript(): ?string
+    {
+        $field = $this->record->getDataField('245');
+
+        if ($field === null) {
+            return null;
+        }
+
+        foreach ($this->record->getAlternateGraphics($field) as $alternate) {
+            $title = $alternate->subfield('a');
+
+            if ($title !== null) {
+                return Punctuation::strip($title);
+            }
+        }
+
+        return null;
+    }
+
     public function statementOfResponsibility(): ?string
     {
         $value = $this->record->getDataField('245')?->subfield('c');
