@@ -9,6 +9,7 @@ final class Punctuation
     private const ABBREVIATIONS = [
         'ed.', 'Ed.', 'etc.', 'Jr.', 'Sr.', 'Dr.', 'Mr.', 'Mrs.', 'Ms.', 'St.', 'vol.', 'Vol.',
         'no.', 'No.', 'pt.', 'Pt.', 'Aufl.', 'Bd.', 'Hrsg.', 'u.a.', 'usw.',
+        'Verl.', 'verl.', 'Ges.', 'Anst.', 'Buchh.', 'Wiss.', 'Univ.', 'Publ.',
     ];
 
     public static function strip(string $value): string
