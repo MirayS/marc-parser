@@ -83,9 +83,9 @@ abstract class AbstractReader
         $this->recordCount++;
     }
 
-    protected function useMarc8(string $leader): void
+    protected function useMarc8(string $leader, bool $unicode = false): void
     {
-        $this->marc8 = match ($this->encoding) {
+        $this->marc8 = !$unicode && match ($this->encoding) {
             Encoding::Marc8 => true,
             Encoding::Utf8 => false,
             Encoding::Auto => (strlen($leader) > 9 ? $leader[9] : 'a') !== 'a',

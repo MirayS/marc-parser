@@ -9,3 +9,6 @@
 - `marc8-corpus.marc8.txt` / `marc8-corpus.utf8.txt` — 1514 paired MARC-8 and UTF-8 strings from
   the ruby-marc test suite (MIT, Copyright Ed Summers, Kevin Clarke, Will Groppe), covering
   Latin diacritics, Greek, Cyrillic, Hebrew, Arabic and EACC.
+- `bnf-sru.xml` — five UNIMARC records in MarcXchange from the Bibliothèque nationale de France
+  SRU gateway (`catalogue.bnf.fr/api/SRU`, `recordSchema=unimarcXchange`) plus one per-record
+  diagnostic, as BnF returns them; BnF catalogue data is under the Licence Ouverte / Etalab.

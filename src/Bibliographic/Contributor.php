@@ -6,6 +6,12 @@ namespace MirayS\Marc\Bibliographic;
 
 final class Contributor
 {
+    public const PERSONAL = 'personal';
+
+    public const CORPORATE = 'corporate';
+
+    public const MEETING = 'meeting';
+
     /**
      * @param list<string> $relatorCodes
      * @param list<string> $relatorTerms
@@ -18,27 +24,29 @@ final class Contributor
         public readonly array $relatorTerms = [],
         public readonly ?string $dates = null,
         public readonly array $identifiers = [],
+        public readonly ?bool $main = null,
+        public readonly ?string $entity = null,
     ) {
     }
 
     public function isPersonal(): bool
     {
-        return in_array($this->tag, ['100', '700'], true);
+        return $this->entity !== null ? $this->entity === self::PERSONAL : in_array($this->tag, ['100', '700'], true);
     }
 
     public function isCorporate(): bool
     {
-        return in_array($this->tag, ['110', '710'], true);
+        return $this->entity !== null ? $this->entity === self::CORPORATE : in_array($this->tag, ['110', '710'], true);
     }
 
     public function isMeeting(): bool
     {
-        return in_array($this->tag, ['111', '711'], true);
+        return $this->entity !== null ? $this->entity === self::MEETING : in_array($this->tag, ['111', '711'], true);
     }
 
     public function isMain(): bool
     {
-        return str_starts_with($this->tag, '1');
+        return $this->main ?? str_starts_with($this->tag, '1');
     }
 
     public function hasRelator(string ...$codes): bool

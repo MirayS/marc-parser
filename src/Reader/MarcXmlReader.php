@@ -21,6 +21,8 @@ final class MarcXmlReader extends AbstractReader
 {
     public const NAMESPACE = 'http://www.loc.gov/MARC21/slim';
 
+    public const MARCXCHANGE_NAMESPACES = ['info:lc/xmlns/marcxchange-v1', 'info:lc/xmlns/marcxchange-v2'];
+
     private const LIBXML_FLAGS = LIBXML_NONET | LIBXML_COMPACT | LIBXML_PARSEHUGE | LIBXML_NOERROR | LIBXML_NOWARNING;
 
     private ?string $recordRawXml = null;
@@ -134,7 +136,7 @@ final class MarcXmlReader extends AbstractReader
 
             $namespace = $reader->namespaceURI;
 
-            if ($namespace !== '' && $namespace !== self::NAMESPACE) {
+            if ($namespace !== '' && $namespace !== self::NAMESPACE && !in_array($namespace, self::MARCXCHANGE_NAMESPACES, true)) {
                 $continue = $reader->read();
 
                 continue;
@@ -154,6 +156,12 @@ final class MarcXmlReader extends AbstractReader
 
             $continue = $reader->next();
         }
+    }
+
+    public static function isUnimarc(DOMElement $element): bool
+    {
+        return in_array($element->namespaceURI, self::MARCXCHANGE_NAMESPACES, true)
+            && stripos($element->getAttribute('format'), 'unimarc') !== false;
     }
 
     private function looksLikeMarc(DOMElement $element): bool
@@ -185,6 +193,7 @@ final class MarcXmlReader extends AbstractReader
     {
         $leader = Leader::DEFAULT;
         $fields = [];
+        $unicode = self::isUnimarc($element);
 
         foreach ($element->childNodes as $child) {
             if (!$child instanceof DOMElement) {
@@ -194,7 +203,7 @@ final class MarcXmlReader extends AbstractReader
             switch ($child->localName) {
                 case 'leader':
                     $leader = $this->parseLeader($child->textContent);
-                    $this->useMarc8($leader);
+                    $this->useMarc8($leader, $unicode);
 
                     break;
                 case 'controlfield':

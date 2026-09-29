@@ -1,9 +1,9 @@
 {
     "name": "mirays/marc",
-    "description": "Streaming MARC 21 parser for PHP: ISO 2709, MARCXML and MARC-in-JSON",
+    "description": "Streaming MARC 21 parser for PHP: ISO 2709, MARCXML and MARC-in-JSON, plus UNIMARC from MarcXchange",
     "type": "library",
     "license": "MPL-2.0",
-    "keywords": ["marc", "marc21", "marcxml", "iso2709", "bibliographic", "library", "metadata", "streaming"],
+    "keywords": ["marc", "marc21", "unimarc", "marcxchange", "marcxml", "iso2709", "bibliographic", "library", "metadata", "streaming"],
     "authors": [
         {
             "name": "Vitali Kuzmich",

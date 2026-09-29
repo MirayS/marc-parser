@@ -1,7 +1,7 @@
 # PHP MARC 21 Parser
 
 Streaming parser for MARC 21 bibliographic records in all three of their serialisations —
-ISO 2709 (`.mrc`), MARCXML and MARC-in-JSON. Reads multi-gigabyte national library dumps in
+ISO 2709 (`.mrc`), MARCXML and MARC-in-JSON, with UNIMARC records read from MarcXchange. Reads multi-gigabyte national library dumps in
 constant memory, exposes the whole standard (leader, 006/007/008 fixed fields for every
 material type, every defined field and subfield), and never aborts a run because of one broken
 record.
@@ -149,6 +149,33 @@ conversion and `$z` excluded), titles with ISBD punctuation stripped, contributo
 relator codes, publisher, dates, language and country codes, extent, subjects, classifications,
 856 links, and the leader/007/338 checks behind `isMonograph()`, `isOnlineResource()` and
 `isDeleted()`.
+
+## UNIMARC
+
+`Reader\MarcXmlReader` also reads MarcXchange (ISO 25577, `info:lc/xmlns/marcxchange-v1` and
+`-v2`), the envelope national libraries such as the BnF use for UNIMARC over SRU. A MarcXchange
+record whose `format` says UNIMARC is always read as Unicode, since its leader has no coding scheme
+at position 09. The record model is shared; `Unimarc\Bibliographic` reads UNIMARC semantics off it
+with the same method names as the MARC 21 shortcuts:
+
+```php
+foreach ((new \MirayS\Marc\Reader\MarcXmlReader())->read('bnf-sru.xml') as $record) {
+    $book = \MirayS\Marc\Unimarc\Bibliographic::of($record);
+
+    echo implode(',', $book->isbn13s()), ' ', $book->titleLong(), ' / ', $book->publisher(), PHP_EOL;
+}
+```
+
+ISBNs come from 010 (and 978/979 EANs from 073), with `isbnField()` returning the 010 that holds a
+given ISBN for its qualification `$b` and price `$d`; titles from 200, publishers from 214 with the
+publication function (the manufacturer is skipped) and 210, dates from 214/210 `$d` and the
+general processing data of 100, languages from 101, the ISO 3166 country from 102, extent and
+dimensions from 215, series from 225 and 410, summaries from 330, subjects from 600-617 and 610,
+Dewey from 676 and the other schemes from 675, 680 and 686. Contributors come from 700-722 with the
+UNIMARC relator codes of `$4` translated to MARC codes by `Unimarc\Relators`, so `isAuthor()` works
+the same for both formats; role words that some agencies put in `$c` of pre-publication records
+arrive as relator terms. `isLanguageMaterial()` falls back to the content form of 181 when the
+leader carries no type of record.
 
 ## Coded values
 
